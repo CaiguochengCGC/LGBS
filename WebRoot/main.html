@@ -1,0 +1,118 @@
+<!--  
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+ <title></title>
+ <link rel="stylesheet" type="text/css" href="lib/ext-3.3.0/resources/css/ext-all.css"/>
+ <link rel="stylesheet" type="text/css" href="lib/ux/css/ux-all.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/ux/css/ux-lovcombo.css"/>
+ <link rel="stylesheet" type="text/css" href="css/icons.css"/>
+ <link rel="stylesheet" id="ht_grid_theme" type="text/css" href="css/grid.css"/>
+ <link rel="stylesheet" type="text/css" href="css/mm.css"/>
+
+
+ <style type="text/css">
+  .header{
+   border:0px none;
+   color:#FFF; 
+   margin:0;
+   height:0px;
+  }
+  .header h1 {font-size:14px; line-height:31px; padding:0 5px;}
+  *{
+   margin:0;padding:0; font-size:12px;
+  }
+  body{
+   font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;
+   font-size:12px;
+  }
+  .x-selectable, .x-selectable * {
+   -moz-user-select: text!important;
+   -khtml-user-select: text!important;
+  }
+        .logo_bg {
+            height:0px;
+            width : 100%;
+            position: absolute;
+            top : 0px;
+            left : 0px;
+            z-index: 1;
+        }
+        .logo{
+            height:30px;
+            position: absolute;
+            top : -1px;
+            left : 10px;
+            z-index: 999999;
+        }
+ </style>
+    
+    <script type="text/javascript" language="javascript">
+       
+       function getCookie(key) {
+            var cookiesArr = document.cookie.split(';');
+            var value = '';
+        
+            for (var i = 0; i < cookiesArr.length; i++) {
+                var arr = cookiesArr[i].split('=');
+                if (('' + arr[0]).replace(/^\s+|\s+$/g, '') == key) {
+                    value = arr[1];
+                    break;
+                }
+            };
+            
+            return value;
+       }
+       
+       var language = 'zh_CN';
+       
+       document.write('<script type="text/javascript" src="lib/ext-3.3.0/ext-base.js"><\/script>');
+       document.write('<script type="text/javascript" src="lib/ext-3.3.0/ext-all.js"><\/script>');
+       document.write('<script type="text/javascript" src="lib/ext-3.3.0/ext-lang-'+ language + '.js"><\/script>');
+       document.write('<script type="text/javascript" src="lib/ux/ux-all.js"><\/script>');
+       document.write('<script type="text/javascript" src="lib/ux/Ext.ux.util.js"><\/script>');
+       
+       document.write('<script type="text/javascript" src="lib/ux/DateTimeField.js"><\/script>');
+       
+       document.write('<script type="text/javascript" src="lib/ux/LovCombo.js"><\/script>');
+       document.write('<script type="text/javascript" src="lib/ux/miframe.js"><\/script>');
+       document.write('<script type="text/javascript" src="lib/ux/PagingStore.js"><\/script>');
+       
+       document.write('<script type="text/javascript" src="js/base/config.js"><\/script>');
+       document.write('<script type="text/javascript" src="js/base/resource_'+ language + '.js"><\/script>');
+       document.write('<script type="text/javascript" src="js/base/tools.js"><\/script>');
+       document.write('<script type="text/javascript" src="js/base/data.js"><\/script>');
+       
+       document.write('<script type="text/javascript" src="js/base/PropertyPanel.js"><\/script>');
+       document.write('<script type="text/javascript" src="js/base/PlainPanel.js"><\/script>');
+       document.write('<script type="text/javascript" src="js/base/DnyaPlainPanel.js"><\/script>');
+       document.write('<script type="text/javascript" src="js/base/RowEditorPanel.js"><\/script>');
+       document.write('<script type="text/javascript" src="js/base/CellEditorPanel.js"><\/script>');
+       
+       document.write('<script type="text/javascript" src="js/base/TextFieldButton.js"><\/script>');
+       document.write('<script type="text/javascript" src="js/base/DateTimeField.js"><\/script>');
+       document.write('<script type="text/javascript" src="js/base/ux-ht.js"><\/script>');
+       
+       document.write('<script type="text/javascript" src="js/base/main.js"><\/script>');
+    </script>
+   
+</head>
+<body>
+    <img src="images/wr_bj04.png" class="logo"/>
+ <div id="panelTop"><div id="toolBar" class="toolBar"></div></div>
+    
+    <div id="REPORT_PRINT_CONTENTER" style="position:absolute; height: 0px; width: 0px; overflow: hidden;">
+    </div>
+    <div id="REPORT_VIEW_CONTENTER" style="position:absolute; height: 0px; width: 0px; overflow: hidden;">
+    </div>
+    <div style="position:absolute; height: 0px; width: 0px; overflow: hidden;">
+      <iframe src="html/tablePrint.html" name="TABLE_PRINT"></iframe>
+    </div>
+  <script type="text/javascript">
+      document.title = ht.msg.main.title;
+  </script>
+</body>
+</html>

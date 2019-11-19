@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<mapping>
+    <class name="com.hanthink.pub.po.SysParamPO" table="SYS_PARAM">
+        <property name="paramCode" type="java.lang.String">
+            <column name="PARAM_CODE"/>
+        </property>
+        <property name="paramGroup" type="java.lang.String">
+            <column name="PARAM_GROUP"/>
+        </property>
+        <property name="paramName" type="java.lang.String">
+            <column name="PARAM_NAME"/>
+        </property>
+        <property name="paramVal" type="java.lang.String">
+            <column name="PARAM_VAL"/>
+        </property>
+        <property name="isEdit" type="java.lang.String">
+            <column name="IS_EDIT"/>
+        </property>
+        <property name="paramType" type="java.lang.String">
+            <column name="PARAM_TYPE"/>
+        </property>
+        <property name="note" type="java.lang.String">
+            <column name="NOTE"/>
+        </property>
+        <property name="lastUpdateUsername" type="java.lang.String">
+            <column name="LAST_UPDATE_USERNAME"/>
+        </property>
+        <property name="lastUpdateIp" type="java.lang.String">
+            <column name="LAST_UPDATE_IP"/>
+        </property>
+        <property name="lastUpdateTime" type="java.util.Date">
+            <column name="LAST_UPDATE_TIME"/>
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="CREATE_TIME"/>
+        </property>
+    </class>
+</mapping>

@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<mapping>
+	<class name="com.hanthink.zzcj.po.TabCycleTimePO" table="ZZCJ_tabCycleTime">
+		<property name="rid" type="java.lang.Integer">
+			<column name="Rid"/>
+		</property>
+		<property name="eventType" type="java.lang.String">
+			<column name="EventType"/>
+		</property>
+		<property name="TIMESTAMP" type="java.lang.String">
+			<column name="TIMESTAMP"/>
+		</property>
+		<property name="CAR_TYPE" type="java.lang.String">
+			<column name="CAR_TYPE"/>
+		</property>
+		<property name="STATION" type="java.lang.String">
+			<column name="STATION"/>
+		</property>
+		<property name="SHIFT" type="java.lang.String">
+			<column name="SHIFT"/>
+		</property>
+		<property name="CT_TOTAL" type="java.lang.String">
+			<column name="CT_TOTAL"/>
+		</property>
+		<property name="CT_ROBOT" type="java.lang.String">
+			<column name="CT_ROBOT"/>
+		</property>
+		<property name="CT_CONVR" type="java.lang.String">
+			<column name="CT_CONVR"/>
+		</property>
+		<property name="CT_EQUIP" type="java.lang.String">
+			<column name="CT_EQUIP"/>
+		</property>
+		<property name="eventData8" type="java.lang.String">
+			<column name="CT_STARV"/>
+		</property>
+		<property name="CT_BLOCK" type="java.lang.String">
+			<column name="CT_BLOCK"/>
+		</property>
+		<property name="CT_MANUL" type="java.lang.String">
+			<column name="CT_MANUL"/>
+		</property>
+		<property name="CT_FAULT" type="java.lang.String">
+			<column name="CT_FAULT"/>
+		</property>
+		<property name="CT_CHANG" type="java.lang.String">
+			<column name="CT_CHANG"/>
+		</property>
+		<property name="CT_PRESS" type="java.lang.String">
+			<column name="CT_PRESS"/>
+		</property>
+		<property name="LINE_ENG" type="java.lang.String">
+			<column name="LINE_ENG"/>
+		</property>
+	</class>
+</mapping>

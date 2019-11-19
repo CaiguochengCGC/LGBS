@@ -1,0 +1,66 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="lib/ext-3.3.0/resources/css/ext-all.css"/>
+	<link rel="stylesheet" type="text/css" href="css/application.css"/>
+     <script type="text/javascript" language="javascript">
+       function getCookie(key) {
+            var cookiesArr = document.cookie.split(';');
+            var value = '';
+        
+            for (var i = 0; i < cookiesArr.length; i++) {
+                var arr = cookiesArr[i].split('=');
+                if (('' + arr[0]).replace(/^\s+|\s+$/g, '') == key) {
+                    value = arr[1];
+                    break;
+                }
+            };
+            
+            return value;
+       }
+       
+       var language = 'zh_CN';
+       document.write('<script type="text/javascript" src="js/login_'+ language + '.js"><\/script>');
+       
+    </script>    
+    
+</head>
+<body style="">
+	<div id="loading-mask" ></div>
+	<div id="loading">
+		<div class="loading-indicat">
+			<img alt="" src="lib/ext-3.3.0/resources/images/default/shared/large-loading.gif" width="32" height="32" style="margin-right:8px;float:left;vertical-align:top;" align="absmiddle">
+            <script type="text/javascript">
+               document.title = msg.title;
+               //document.write(msg.mesLogin);
+            </script> 
+            <br/>
+			<span id="loading-msg">
+              <script type="text/javascript">
+                //document.write(msg.loadingMsg);
+              </script> 
+            </span>
+		</div>
+	</div>
+        
+    <div id="loginpanel"></div>
+	
+	
+	
+	
+	<script type="text/javascript" src="lib/ext-3.3.0/ext-base.js"></script>
+	<script type="text/javascript">
+        //document.getElementById('loading-msg').innerHTML = msg.loadingUI;
+    </script>
+	<script type="text/javascript" src="lib/ext-3.3.0/ext-all.js"></script>
+    
+    <script type="text/javascript">
+        document.write('<script type="text/javascript" src="lib/ext-3.3.0/ext-lang-'+ language + '.js"><\/script>');
+        //document.getElementById('loading-msg').innerHTML = msg.initUI;
+        document.write('<script type="text/javascript" src="js/login_redirect.js"><\/script>');
+    </script> 
+	
+</body>
+
+</html>

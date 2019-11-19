@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<mapping>
+	<class name="com.hanthink.pmc.po.WorkDateEditPO" table="PMC_WORKDATE">
+
+		<property name="workDate" type="java.lang.String">
+			<column name="Work_Date"/>
+		</property>
+		<property name="modelCode" type="java.lang.String">
+			<column name="Model_Code"/>
+		</property>
+		<property name="workShop" type="java.lang.String">
+			<column name="Work_Shop"/>
+		</property>
+		<property name="shift" type="java.lang.Integer">
+			<column name="Shift"/>
+		</property>
+		<property name="isWorkDate" type="java.lang.Integer">
+			<column name="Is_WorkDate"/>
+		</property>
+		<property name="lastUpTime" type="java.lang.String">
+			<column name="LastUpTime"/>
+		</property>
+		<property name="lineName" type="java.lang.String">
+			<column name="Line_Name"/>
+		</property>
+		<property name="lineCode" type="java.lang.String">
+			<column name="Line_Code"/>
+		</property>
+	</class>
+</mapping>

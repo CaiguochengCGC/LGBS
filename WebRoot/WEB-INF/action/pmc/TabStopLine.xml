@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+    
+    <Action id="QUERY_TAB_STOP_LINE_ACTION">
+        <Description>查询【停线查询表】</Description>
+        <ActionContext>
+        	<Data name="limit" type="string" />
+			<Data name="start" type="string" />
+			<Data name="STOPRESON" type="string" /><!-- 停线原因 -->
+			<Data name="EventDate1" type="string" /><!-- 工位 -->
+			<Data name="EventDate2" type="string" /><!-- 班次 -->
+			<Data name="EventDate46" type="string" /><!-- 工段名字 -->
+			<Data name="START_PLAN_DATE" type="string" /><!-- 开始日期 -->
+			<Data name="END_PLAN_DATE" type="string" /><!-- 结束日期 -->
+			<Data name="BANCI" type="string" /> EventData3
+			<Data name="EventData3" type="string" /><!-- 结束日期 -->
+			<Data name="TAB_STOP_LINE" type="array" output="true"/>
+			<Data name="queryType" type="string" />
+		</ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pmc.action.QueryTabStopLineAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+
+    
+    <Action id="EXPORT_TAB_STOP_LINE_ACTION">
+		<Description>导出【停线查询表】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+		    <Data name="START_PLAN_DATE" type="string" /><!-- 开始日期 -->
+			<Data name="END_PLAN_DATE" type="string" /><!-- 结束日期 -->
+			<Data name="EventDate46" type="string" /><!-- EventDate40-->
+			<Data name="EventDate1" type="string" /><!-- EventDate1 -->
+			<Data name="EventData3" type="string" /><!-- EventDate2 -->
+			<Data name="BANCI" type="string" />
+			<Data name="TAB_STOP_LINE" type="array" output="true"/>
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.ExportTabStopLineAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="QUERY_TAB_STOP_LINE_RESPON_ACTION">
+		<Description>查询责任部门【停线查询表】</Description>
+		<ActionContext>
+			<Data name="PPDATE" type="string" /><!-- 日期 -->
+			<Data name="BANCI" type="string" />
+			<Data name="TAB_STOP_LINE" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryTabStopLineResopnAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="EXPORT_TAB_STOP_LINE_RESPON_ACTION">
+		<Description>导出责任部门【停线查询表】</Description>
+		<ActionContext>
+			<Data name="PPDATE" type="string" /><!-- 日期 -->
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+		    <Data name="BANCI" type="string" />
+			<Data name="TAB_STOP_LINE" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.ExportTabStopLineResponAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+	<Action id="QUERY_PMC_PP_STOP_RESON_ACTION">
+		<Description>查询【停线原因】</Description>
+		<ActionContext>
+			<Data name="PMC_PP_STOP_RESON" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryStopLineResonAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+
+
+	<Action id="QUERY_STOP_RESON_TABLE_ACTION">
+		<Description>查询【停线详情查询表】</Description>
+		<ActionContext>
+			<Data name="START_TIME" type="string" /><!-- 开始时间 -->
+			<Data name="END_TIME" type="string" /><!-- 结束时间 -->
+			<Data name="LINECODE" type="string" /><!-- 线体英文简称 -->
+			<Data name="STOPTYPE" type="string" /><!-- 停线类别 -->
+			<Data name="SHIFT" type="string" /><!-- 班次 -->
+			<Data name="PMC_STOP_RESON_PLANEL" type="array" output="true"/>
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryStopDetaileAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<Action id="QUERY_STOP_RESON_TABLE_COUNT_ACTION">
+		<Description>查询【停线详情次数查询表】</Description>
+		<ActionContext>
+			<Data name="START_TIME" type="string" /><!-- 开始时间 -->
+			<Data name="END_TIME" type="string" /><!-- 结束时间 -->
+			<Data name="LINECODE" type="string" /><!-- 线体英文简称 -->
+			<Data name="STOPTYPE" type="string" /><!-- 停线类别 -->
+			<Data name="SHIFT" type="string" /><!-- 班次 -->
+			<Data name="PMC_STOP_RESON_PLANEL" type="array" output="true"/>
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryStopDetaileCountAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+	<Action id="QUERY_STOP_REASON_TABLE_DETAILED_ACTION">
+		<Description>查询【停线详情查询表】</Description>
+		<ActionContext>
+			<Data name="limit" type="string" />
+			<Data name="start" type="string" />
+			<Data name="lineName" type="string" />
+			<Data name="workTime" type="string" />
+			<Data name="shift" type="string" />
+			<Data name="stopType" type="string" />
+			<Data name="STOP_DETAILED" type="array" output="true"/>
+            <Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryStopReasonDetailedAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+	<Action id="QUERY_STOP_COUNT_REASON_DETAILED_TABLE_ACTION">
+		<Description>查询【工位报警频次分析详情】</Description>
+		<ActionContext>
+			<Data name="limit" type="string" />
+			<Data name="start" type="string" />
+			<Data name="lineName" type="string" />
+			<Data name="workTime" type="string" />
+			<Data name="shift" type="string" />
+			<Data name="stopType" type="string" />
+			<Data name="stopStation" type="string" />
+			<Data name="STOP_DETAILED" type="array" output="true"/>
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryStopReasonStationDetailedAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<Action id="EXPORT_PMC_STOP_DETAIL_ACTION">
+		<Description>导出停线详情【停线详情】</Description>
+		<ActionContext>
+			<Data name="START_TIME" type="string" /><!-- 开始时间 -->
+			<Data name="END_TIME" type="string" /><!-- 结束时间 -->
+			<Data name="LINECODE" type="string" /><!-- 线体英文简称 -->
+			<Data name="STOPTYPE" type="string" /><!-- 停线类别 -->
+			<Data name="SHIFT" type="string" /><!-- 班次 -->
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+			<Data name="COLUMN" type="array"/><!-- 列标 -->
+			<Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.ExportTabStopLineDetailAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+	<Action id="QUERY_STOP_COUNT_DETAIL">
+		<Description>查询【停线详情查询表】</Description>
+		<ActionContext>
+			<Data name="START_TIME" type="string" /><!-- 开始时间 -->
+			<Data name="END_TIME" type="string" /><!-- 结束时间 -->
+			<Data name="LINECODE" type="string" /><!-- 线体英文简称 -->
+			<Data name="SHIFT" type="string" /><!-- 班次 -->
+			<Data name="PMC_STOP_COUNT_DETAIL" type="array" output="true"/>
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryStopCountAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+	<Action id="QUERY_STOP_COUNT_RESON_TABLE_ACTION">
+		<Description>查询【停线次数详情查询表】</Description>
+		<ActionContext>
+			<Data name="START_TIME" type="string" /><!-- 开始时间 -->
+			<Data name="END_TIME" type="string" /><!-- 结束时间 -->
+			<Data name="LINECODE" type="string" /><!-- 线体英文简称 -->
+			<Data name="STOPTYPE" type="string" /><!-- 停线类别 -->
+			<Data name="SHIFT" type="string" /><!-- 班次 -->
+			<Data name="STATION" type="string" /><!-- 工位 -->
+			<Data name="PMC_STOP_RESON_PLANEL" type="array" output="true"/>
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryStopCountDetaileAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+
+	<Action id="EXPORT_PMC_STOP_COUNT_DETAIL_ACTION">
+		<Description>导出停线详情【停线详情】</Description>
+		<ActionContext>
+			<Data name="START_TIME" type="string" /><!-- 日期 -->
+			<Data name="END_TIME" type="string" /><!-- 日期 -->
+			<Data name="LINECODE" type="string" /><!-- 日期 -->
+			<Data name="STOPTYPE" type="string" /><!-- 日期 -->
+			<Data name="SHIFT" type="string" /><!-- 日期 -->
+			<Data name="STATION" type="string" /><!-- 工位 -->
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+			<Data name="COLUMN" type="array"/><!-- 列标 -->
+			<Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.ExportTabStopLineCountDetailAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+
+	<Action id="QUERY_PRODUCT_TABLE_ACTION">
+		<Description>查询【产量详情查询表】</Description>
+		<ActionContext>
+			<Data name="START_TIME" type="string" /><!-- 开始时间 -->
+			<Data name="END_TIME" type="string" /><!-- 结束时间 -->
+			<Data name="LINECODE" type="string" /><!-- 线体英文简称 -->
+			<Data name="STOPTYPE" type="string" /><!-- 停线类别 -->
+			<Data name="SHIFT" type="string" /><!-- 班次 -->
+			<Data name="PMC_PRODUCT_PLANEL" type="array" output="true"/>
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryProductDetaileAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+
+	<Action id="EXPORT_PRODUCT_DETAIL_ACTION">
+		<Description>导出产量详情【停线详情】</Description>
+		<ActionContext>
+			<Data name="START_TIME" type="string" /><!-- 开始时间 -->
+			<Data name="END_TIME" type="string" /><!-- 结束时间 -->
+			<Data name="LINECODE" type="string" /><!-- 线体英文简称 -->
+			<Data name="STOPTYPE" type="string" /><!-- 停线类别 -->
+			<Data name="SHIFT" type="string" /><!-- 班次 -->
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+			<Data name="COLUMN" type="array"/><!-- 列标 -->
+			<Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.ExpProductDetailAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+</Config>

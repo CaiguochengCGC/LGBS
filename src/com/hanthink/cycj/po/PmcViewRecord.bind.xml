@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<mapping>
+	<class name="com.hanthink.cycj.po.PmcViewRecordPO" table="CYCJ_VIEW_RECORD">
+		<property name="id" type="java.lang.Integer">
+			<column name="ID" />
+		</property>
+		<property name="factory" type="java.lang.String">
+			<column name="FACTORY" />
+		</property>
+		<property name="workshop" type="java.lang.String">
+			<column name="WORKSHOP" />
+		</property>
+		<property name="recorddate" type="java.util.Date">
+			<column name="RECORDDATE" />
+		</property>
+		<property name="username" type="java.lang.String">
+			<column name="USERNAME" />
+		</property>
+		<property name="recordcontent" type="java.lang.String">
+			<column name="RECORDCONTENT" />
+		</property>
+		<property name="remark" type="java.lang.String">
+			<column name="REMARK" />
+		</property>
+		<property name="operuser" type="java.lang.String">
+			<column name="OPERUSER" />
+		</property>
+		<property name="updatetime" type="java.util.Date">
+			<column name="UPDATETIME" />
+		</property>
+	</class>
+</mapping>

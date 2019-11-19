@@ -1,0 +1,321 @@
+.x-grid3-row-alt {
+    background-color: '#AFEEEE';
+}
+
+.ux-grid-hd-group-cell .x-grid3-hd-checker {
+    background-image: none;
+}
+
+.x-grid3-row-selected {
+    background-color: #B39E4D !important;
+}
+.ht-grid3-cell-error div.x-grid3-cell-inner{
+    background-color: #F0E68C !important;
+}
+
+.ht-grid3-editable div.x-grid3-cell-inner{
+    background-color: #33CCCC !important;
+}
+
+.x-grid3-row-selected  div.x-grid3-cell-inner {
+    color: #fff !important;
+}
+
+.x-grid3-row-selected div.x-grid3-col-numberer {
+    color: #000 !important;
+}
+
+.ht-diff-row div.x-grid3-cell-inner {
+    color: #104E8B !important;
+}
+
+.x-grid3-row td,.x-grid3-summary-row td {
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+/*閿欒鎻愮ず*/
+.ext-ie .x-tip .x-tip-tc {
+    height: 6px;
+}
+.ext-ie .x-tip .x-tip-body {
+    padding-top: 4px;
+}
+
+/* 淇敼瀛椾綋寮�濮� */
+
+/*琛ㄦ牸-鍒楀ご*/
+.x-grid3-hd-inner {
+    text-align: center;
+    font-size: 12px;
+}
+/*琛ㄦ牸-鍗曞厓鏍�*/
+DIV.x-grid3-cell-inner {
+    font-size: 12px;
+}
+/*鎸夐挳*/
+.x-btn BUTTON, BUTTON.x-btn-text {
+    font-size: 12px;
+}
+/*杈撳叆妗嗘寜閽�-鑷畾涔夋帶浠�*/
+BUTTON.ht-textfield-button {
+    font-size: 6px;
+    width: 10px;
+    height: 10px;
+}
+.ext-ie .x-row-editor .ht-textfield-field {
+    margin-top: 1px !important;
+}
+.x-btn-icon .x-btn-small .ht-textfield-button {
+    width: 14px;
+    float: left;
+    margin-left: 0px;
+}
+.x-row-editor .x-btn-icon .x-btn-small .ht-textfield-button {
+    width: 16px;
+    height: 15px;
+}
+
+.ht-textfield-form .x-btn-tl, .ht-textfield-form .x-btn-ml, .ht-textfield-form .x-btn-bl {
+    display: none;
+}
+
+/*宸ュ叿鏍�*/
+.x-toolbar DIV, .x-toolbar SPAN, .x-toolbar LABEL{
+    font-size: 12px;
+}
+/*TAB*/
+.x-tab-strip SPAN.x-tab-strip-text {
+    font-size: 12px;
+}
+/*鏍囨敞*/
+LABEL.x-form-item-label {
+   font-size: 12px;
+}
+/*缂栬緫妗�*/
+INPUT.x-form-field, TEXTAREA.x-form-field {
+   font-size: 12px;
+}
+/*涓嬫媺妗�*/
+DIV.x-combo-list-item, DIV.ux-lovcombo-item-text, .x-small-editor .x-form-field {
+   font-size: 12px;
+}
+/*闈㈡澘鏍囬*/
+SPAN.x-panel-header-text {
+   font-size: 12px;
+}
+/*寮圭獥*/
+.x-window-dlg .x-window-header-text, .x-window-dlg .ext-mb-text, SPAN.x-window-header-text {
+    font-size: 12px;
+}
+/*鑷墿灞旸IV*/
+DIV.ht-define-ext {
+   font-size: 12px;
+   
+}
+DIV.ht-define-ext P{
+    margin : 0px;
+    padding : 0px;
+    padding-bottom: 5px;
+}
+
+/*閿欒鎻愮ず*/
+.ext-ie .x-tip .x-tip-body {
+    font-size: 12px;
+}
+/* 淇敼瀛椾綋缁撴潫 */
+
+
+/*鍘绘帀琛岄棿绌虹櫧*/
+.x-grid3-row {
+    border-right-width: 0px;
+    border-left-width: 0px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+}
+
+/*鍖哄煙*/
+.ext-ie .x-fieldset LEGEND {
+    margin-bottom: 0px;
+}
+.ext-ie .x-fieldset {
+    padding-bottom: 0px;
+}
+.x-fieldset {
+
+}
+
+.ht-field-reqire, TEXTAREA.ht-field-reqire, .x-form-composite .ht-field-reqire{
+    background:  #FFFF6F;
+}
+
+.ht-field-readonly, TEXTAREA.ht-field-readonly, .x-form-composite .ht-field-readonly{
+     background:  #CCCCCC;
+}
+
+/*楠岃瘉*/
+.x-form-invalid,  .x-form-composite .x-form-invalid{
+    background-image : url("../images/invalid_line.gif");
+    background-repeat: repeat-x;
+    background-position: bottom;
+}
+
+/*鍒楀ご鍚岄珮搴�*/
+.ht-same-height .x-grid3-hd-row td {
+    height : 22px;
+}
+
+/*鍒楀悓楂樺害*/
+.ht-same-height .x-grid3-row td, .ht-same-height .x-grid3-summary-row td{ 
+    height : 22px;
+}
+
+/*鍘婚櫎宸﹁竟妗�*/
+.ht-gridpanel-border-left .x-panel-body, .ht-gridpanel-border-left .x-panel-tbar .x-toolbar {
+    border-left-width: 0px;
+}
+
+/*鍘婚櫎鍙宠竟妗�*/
+.ht-gridpanel-border-right .x-panel-body, .ht-gridpanel-border-right .x-panel-tbar .x-toolbar {
+    border-right-width: 0px;
+}
+
+/*鍘婚櫎椤惰竟妗�*/
+.ht-gridpanel-border-top .x-panel-body, .ht-gridpanel-border-top .x-panel-tbar .x-toolbar {
+    border-top-width: 0px;
+}
+
+.x-rm-grid-border-top .x-panel-body {
+    border-top-width: 0px;
+}
+.x-rm-grid-border-right .x-panel-body {
+    border-right-width: 0px;
+}
+.x-rm-grid-border-bottom .x-panel-body {
+    border-bottom-width: 0px;
+}
+.x-rm-grid-border-left .x-panel-body {
+    border-left-width: 0px;
+}
+
+.x-rm-tab-border-top .x-tab-panel-header {
+    border-bottom-width: 0px;
+}
+.x-rm-tab-border-right .x-tab-panel-body {
+    border-right-width: 0px;
+}
+.x-rm-tab-border-bottom .x-tab-panel-body {
+    border-bottom-width: 0px;
+}
+.x-rm-tab-border-left .x-tab-panel-body {
+    border-left-width: 0px;
+}
+
+
+/*鍘婚櫎搴曡竟妗�*/
+.ht-gridpanel-border-bottom .x-panel-body, .ht-gridpanel-border-bottom .x-panel-tbar .x-toolbar {
+    border-bottom-width: 0px;
+}
+
+/*妯嚎锛宲anel褰撴í绾夸娇鐢�*/
+.horizontal-line .x-panel-body {
+    height: 1px;
+    border-width: 0px;
+    border-top-width: 1px;
+    border-style: solid;
+    margin: 7px 0px 12px;
+}
+
+/*淇℃伅鍙嶉-姝ｅ湪鍔犺浇*/
+.ht-msg-loading {
+    background: url("../images/loading.gif")  0px -1px no-repeat;
+    padding-left: 18px;
+    line-height: 150%;
+}
+
+/*淇℃伅鍙嶉-鎻愮ず*/
+.ht-msg-info {
+    background: url("../images/information.png")  0px -1px no-repeat;
+    padding-left: 18px;
+    line-height: 150%;
+}
+
+/*淇℃伅鍙嶉-閿欒*/
+.ht-msg-error {
+    background: url("../images/exclamation.gif") 0px -1px no-repeat;
+    padding-left: 18px;
+    line-height: 150%;
+}
+
+/*杈撳叆妗嗗娉�*/
+.ht-remark {
+   position: absolute;
+   padding: 3px 0px 0px 5px;
+}
+
+.ht-grid-border TD {
+    border-width: 1px;
+    border-style: solid;
+}
+
+.msg .x-box-mc {
+    font-size:12px;
+}
+.msg .content {
+    margin: 0px 0px 0px 0px;
+}
+
+.msg .action {
+    position: relative;
+}
+
+.msg .query-action {
+    margin: 0px 5px 0px 100px;
+    float: left;
+}
+.msg .remove-action {
+    
+}
+.msg A {
+    color: #0000FF;
+    text-decoration: none;
+}
+.msg .hide-action {
+    text-align: right;
+    margin-right: 10px;
+}
+
+.msg-div {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    width: 300px;
+    z-index: 20000;
+    font-size: 12px;
+}
+.msg-div .content {
+    line-height: 150%;
+}
+
+.x-grid3-row TD {
+    vertical-align: middle;
+}
+
+.x-grid3-textfield-col {
+    width: 100%;
+    font-size: 12px;
+}
+.x-grid3-radiogroup-col {
+    margin-right: 5px;
+}
+
+.x-grid3-checkboxgroup-col {
+    margin-right: 5px;
+}
+
+A.x-grid3-link-col {
+    color: #0000FF;
+    text-decoration: none;
+}

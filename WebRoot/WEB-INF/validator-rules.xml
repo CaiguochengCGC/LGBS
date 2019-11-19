@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+注意：以下的属性部分需要在对应的属性文件中加载，msg的属性是对应这部分内容的
+common.errors.required={0}不能为空.
+common.errors.minlength={0}不能少于{1}个字符.
+common.errors.maxlength={0}不能大于{1}个字符.
+common.errors.invalid={0}无效.
+
+common.errors.byte={0}必须为byte类型.
+common.errors.short={0}必须为short类型.
+common.errors.integer={0}必须为int类型.
+common.errors.long={0}必须为long类型.
+common.errors.float={0}必须为float类型.
+common.errors.double={0}必须为double类型.
+
+common.errors.date={0}是无效的日期格式,正确的格式例如:2008-08-08 18:00:00.
+common.errors.date2={0}是无效的日期格式,正确的格式例如:2008-08-08.
+common.errors.range={0}不在{1}到{2}之间.
+common.errors.email={0}是无效的email.
+common.errors.url={0}是无效的url.
+common.errors.regex={0}是无效的格式.
+-->
+
+<validation-rules>
+
+   <global>
+	<!-- 不能为空 -->
+      <validator name="required"
+            classname="cn.boho.framework.validator.FieldChecks"
+               method="validateRequired"
+         methodParams="java.lang.String,java.lang.String,java.util.ArrayList,cn.boho.framework.context.ActionContext,cn.boho.framework.validator.validators.ValidatorPO"
+                  msg="common.errors.required"/>
+                  
+	<!-- 最小长度:  min[5]-->
+      <validator name="min"
+            classname="cn.boho.framework.validator.FieldChecks"
+               method="validateMinLength"
+         methodParams="java.lang.String,java.lang.String,java.util.ArrayList,cn.boho.framework.context.ActionContext,cn.boho.framework.validator.validators.ValidatorPO"
+                  msg="common.errors.minlength"/>
+
+	<!-- 最大长度:  max[10] -->
+      <validator name="max"
+            classname="cn.boho.framework.validator.FieldChecks"
+               method="validateMaxLength"
+         methodParams="java.lang.String,java.lang.String,java.util.ArrayList,cn.boho.framework.context.ActionContext,cn.boho.framework.validator.validators.ValidatorPO"
+                  msg="common.errors.maxlength"/>
+                  
+	<!-- byte -->
+      <validator name="byte"
+            classname="cn.boho.framework.validator.FieldChecks"
+               method="validateByte"
+         methodParams="java.lang.String,java.lang.String,java.util.ArrayList,cn.boho.framework.context.ActionContext,cn.boho.framework.validator.validators.ValidatorPO"
+                  msg="common.errors.byte"/>
+
+	<!-- short -->
+      <validator name="short"
+            classname="cn.boho.framework.validator.FieldChecks"
+               method="validateShort"
+         methodParams="java.lang.String,java.lang.String,java.util.ArrayList,cn.boho.framework.context.ActionContext,cn.boho.framework.validator.validators.ValidatorPO"
+                  msg="common.errors.short"/>
+
+	<!-- int -->
+      <validator name="int"
+            classname="cn.boho.framework.validator.FieldChecks"
+               method="validateInteger"
+         methodParams="java.lang.String,java.lang.String,java.util.ArrayList,cn.boho.framework.context.ActionContext,cn.boho.framework.validator.validators.ValidatorPO"
+                  msg="common.errors.integer"/>
+
+	<!-- long -->
+      <validator name="long"
+            classname="cn.boho.framework.validator.FieldChecks"
+               method="validateLong"
+         methodParams="java.lang.String,java.lang.String,java.util.ArrayList,cn.boho.framework.context.ActionContext,cn.boho.framework.validator.validators.ValidatorPO"
+                  msg="common.errors.long"/>
+
+	<!-- float -->
+      <validator name="float"
+            classname="cn.boho.framework.validator.FieldChecks"
+               method="validateFloat"
+         methodParams="java.lang.String,java.lang.String,java.util.ArrayList,cn.boho.framework.context.ActionContext,cn.boho.framework.validator.validators.ValidatorPO"
+                  msg="common.errors.float"/>
+                  
+	<!-- double -->
+      <validator name="double"
+            classname="cn.boho.framework.validator.FieldChecks"
+               method="validateDouble"
+         methodParams="java.lang.String,java.lang.String,java.util.ArrayList,cn.boho.framework.context.ActionContext,cn.boho.framework.validator.validators.ValidatorPO"
+                  msg="common.errors.double"/>
+
+	<!-- date:格式： yyyy-MM-dd HH:mm:ss  2008-11-22 15:24:30 -->
+      <validator name="date"
+            classname="cn.boho.framework.validator.FieldChecks"
+               method="validateDate"
+         methodParams="java.lang.String,java.lang.String,java.util.ArrayList,cn.boho.framework.context.ActionContext,cn.boho.framework.validator.validators.ValidatorPO"
+                  msg="common.errors.date"/>
+                  
+    <!-- date:格式： yyyy-MM-dd   2008-11-22  -->
+      <validator name="date2"
+            classname="cn.boho.framework.validator.FieldChecks"
+               method="validateDate2"
+         methodParams="java.lang.String,java.lang.String,java.util.ArrayList,cn.boho.framework.context.ActionContext,cn.boho.framework.validator.validators.ValidatorPO"
+                  msg="common.errors.date2"/>
+
+	<!-- int的范围: intRange[1:100] -->
+      <validator name="intRange"
+            classname="cn.boho.framework.validator.FieldChecks"
+               method="validateIntRange"
+         methodParams="java.lang.String,java.lang.String,java.util.ArrayList,cn.boho.framework.context.ActionContext,cn.boho.framework.validator.validators.ValidatorPO"
+              depends="int"
+                  msg="common.errors.range"/>
+
+	<!-- float的范围: floatRange[1.2:5.5]-->
+      <validator name="floatRange"
+            classname="cn.boho.framework.validator.FieldChecks"
+               method="validateFloatRange"
+         methodParams="java.lang.String,java.lang.String,java.util.ArrayList,cn.boho.framework.context.ActionContext,cn.boho.framework.validator.validators.ValidatorPO"
+              depends="float"
+                  msg="common.errors.range"/>
+
+	<!-- double的范围: doubleRange[1.2:5.5]-->
+      <validator name="doubleRange"
+            classname="cn.boho.framework.validator.FieldChecks"
+               method="validateDoubleRange"
+         methodParams="java.lang.String,java.lang.String,java.util.ArrayList,cn.boho.framework.context.ActionContext,cn.boho.framework.validator.validators.ValidatorPO"
+              depends="double"
+                  msg="common.errors.range"/>
+
+	<!-- email -->
+      <validator name="email"
+            classname="cn.boho.framework.validator.FieldChecks"
+               method="validateEmail"
+         methodParams="java.lang.String,java.lang.String,java.util.ArrayList,cn.boho.framework.context.ActionContext,cn.boho.framework.validator.validators.ValidatorPO"
+                  msg="common.errors.email"/>
+
+	<!-- url -->
+      <validator name="url"
+            classname="cn.boho.framework.validator.FieldChecks"
+               method="validateUrl"
+         methodParams="java.lang.String,java.lang.String,java.util.ArrayList,cn.boho.framework.context.ActionContext,cn.boho.framework.validator.validators.ValidatorPO"
+                  msg="common.errors.url"/>
+
+   </global>
+
+	<!-- 自定义正则表达式的部分，defaultmsg是所有正则表达式默认的消息key，如果个别不同，则赋予msg属性新值 -->
+	<regular-expression defaultmsg="common.errors.regex">
+		<regex name="aaa" msg="common.errors.regex.aaa"><![CDATA[[0-9]+]]></regex>
+		<regex name="bbb" ><![CDATA[[0-9]+]]></regex>
+		<!-- 移动号码正则表达式 author ：陈斌 2008-11-24 -->
+		<regex name="mobile" msg="common.errors.regex.mobile" ><![CDATA[^((\(\d{3}\))|(\d{3}\-))?(134|135|136|137|138|139|150|151|152|153|154|155|156|157|158|159)\d{8}$]]></regex>
+		<!-- 判断是否是空字符串正则表达式 author ：陈斌 2008-12-6 -->
+		<regex name="blank" msg="common.errors.regex.blank" ><![CDATA[^( )*$]]></regex>
+	</regular-expression>
+
+</validation-rules>

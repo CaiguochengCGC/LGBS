@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+
+	
+	<Action id="ZZCJ_QUERY_PMC_DATE_PPNECK_FOR_STOPTIME_ACTION">
+		<Description>按停机时间Top查询【瓶颈设备表】</Description>
+		<ActionContext>
+            <Data name="PPDATE" type="string" />
+            <Data name="QUERY_TYPE" type="string" />
+			<Data name="tabStopLineCount" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.zzcj.action.QueryPmcDatePpneckForStopTimeAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+    
+     <Action id="ZZCJ_EXPORT_PMC_DATE_PPNECK_FOR_STOPTIME_DAY_ACTION">
+        <Description>导出按停机时间Top查询【瓶颈设备表】</Description>
+        <ActionContext>
+        	<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+            <Data name="PPDATE" type="string" />
+            <Data name="QUERY_TYPE" type="string" />
+            <Data name="tabStopLineCount" type="array" output="true"/>
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.zzcj.action.ExportPmcDatePpneckForStopTimeDayAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+    <Action id="ZZCJ_EXPORT_PMC_DATE_PPNECK_FOR_STOPTIME_WEEK_ACTION">
+        <Description>导出按停机时间Top查询【瓶颈设备表】</Description>
+        <ActionContext>
+        	<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+            <Data name="PPDATE" type="string" />
+            <Data name="QUERY_TYPE" type="string" />
+            <Data name="tabStopLineCount" type="array" output="true"/>
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.zzcj.action.ExportPmcDatePpneckForStopTimeWeekAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+    <Action id="ZZCJ_EXPORT_PMC_DATE_PPNECK_FOR_STOPTIME_MONTH_ACTION">
+        <Description>导出按停机时间Top查询【瓶颈设备表】</Description>
+        <ActionContext>
+        	<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+            <Data name="PPDATE" type="string" />
+            <Data name="QUERY_TYPE" type="string" />
+            <Data name="tabStopLineCount" type="array" output="true"/>
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.zzcj.action.ExportPmcDatePpneckForStopTimeMonthAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+    <Action id="ZZCJ_EXPORT_PMC_DATE_PPNECK_FOR_STOPTIME_YEAR_ACTION">
+        <Description>导出按停机时间Top查询【瓶颈设备表】</Description>
+        <ActionContext>
+        	<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+            <Data name="PPDATE" type="string" />
+            <Data name="QUERY_TYPE" type="string" />
+            <Data name="tabStopLineCount" type="array" output="true"/>
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.zzcj.action.ExportPmcDatePpneckForStopTimeYearAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+    <Action id="ZZCJ_QUERY_PMC_DATE_PPNECK_FOR_STOPCOUNT_ACTION">
+        <Description>按停机次数Top查询【瓶颈设备表】</Description>
+        <ActionContext>
+            <Data name="PPDATE" type="string" />
+            <Data name="QUERY_TYPE" type="string" />
+            <Data name="tabStopLineCount" type="array" output="true"/>
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.zzcj.action.QueryPmcDatePpneckForStopCountAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+    <Action id="ZZCJ_EXPORT_PMC_DATE_PPNECK_FOR_STOPCOUNT_DAY_ACTION">
+        <Description>导出按停机次数Top查询【瓶颈设备表】</Description>
+        <ActionContext>
+        	<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+            <Data name="PPDATE" type="string" />
+            <Data name="QUERY_TYPE" type="string" />
+            <Data name="tabStopLineCount" type="array" output="true"/>
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.zzcj.action.ExportPmcDatePpneckForStopCountDayAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+    <Action id="ZZCJ_EXPORT_PMC_DATE_PPNECK_FOR_STOPCOUNT_WEEK_ACTION">
+        <Description>导出按停机次数Top查询【瓶颈设备表】</Description>
+        <ActionContext>
+        	<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+            <Data name="PPDATE" type="string" />
+            <Data name="QUERY_TYPE" type="string" />
+            <Data name="tabStopLineCount" type="array" output="true"/>
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.zzcj.action.ExportPmcDatePpneckForStopCountWeekAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+    <Action id="ZZCJ_EXPORT_PMC_DATE_PPNECK_FOR_STOPCOUNT_MONTH_ACTION">
+        <Description>导出按停机次数Top查询【瓶颈设备表】</Description>
+        <ActionContext>
+        	<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+            <Data name="PPDATE" type="string" />
+            <Data name="QUERY_TYPE" type="string" />
+            <Data name="tabStopLineCount" type="array" output="true"/>
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.zzcj.action.ExportPmcDatePpneckForStopCountMonthAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+    <Action id="ZZCJ_EXPORT_PMC_DATE_PPNECK_FOR_STOPCOUNT_YEAR_ACTION">
+        <Description>导出按停机次数Top查询【瓶颈设备表】</Description>
+        <ActionContext>
+        	<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+            <Data name="PPDATE" type="string" />
+            <Data name="QUERY_TYPE" type="string" />
+            <Data name="tabStopLineCount" type="array" output="true"/>
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.zzcj.action.ExportPmcDatePpneckForStopCountYearAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+       
+</Config>

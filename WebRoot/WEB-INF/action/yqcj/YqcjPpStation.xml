@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+	
+	<Action id="YQCJ_UPDATE_PMC_STATION_ACTION">
+		<Description>修改最后工位【生产工位表】</Description>
+		<ActionContext>
+			<Data name="PRODUCTIONLINE" type="string" />
+			<Data name="PRODUCTIONLINENAME" type="string" />
+			<Data name="REMARK" type="string" />
+			<Data name="PSEQ" type="string" />
+			<Data name="PMC_PP_STATION" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.UpdatePmcPpStationAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_QUERY_PMC_STATION_ACTION">
+		<Description>查询【生产工位表】</Description>
+		<ActionContext>
+			<Data name="PRODUCTIONNAME" type="string" />
+			<Data name="PMC_PP_STATION" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.QueryPmcPpStationByMaintainAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_QUERY_PMC_PP_STATION_ACTION">
+		<Description>查询【生产工位表】</Description>
+		<ActionContext>
+			<Data name="CODE_TYPE" type="string" />
+			<Data name="PMC_PP_STATION" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.QueryPmcPpStationAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<Action id="YQCJ_QUERY_PMC_PP_STATION_STATION_ACTION">
+		<Description>查询【生产工位表】</Description>
+		<ActionContext>
+			<Data name="CODE_TYPE" type="string" />
+			<Data name="QUERY_CODE" type="string" />
+			<Data name="PMC_PP_STATION" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.QueryPmcPpStationByProductNameAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<Action id="YQCJ_QUERY_PMC_PP_STATION_ALL_ACTION">
+		<Description>查询【生产工位表tabStopSta】</Description>
+		<ActionContext>
+			<Data name="CODE_TYPE" type="string" />
+			<Data name="PMC_PP_STATION" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.QueryPmcPpStationAllAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_QUERY_PMC_PP_STATION_S_ACTION">
+		<Description>查询【生产工位表】</Description>
+		<ActionContext>
+			<Data name="PRODUCTIONLINENAME" type="string" />
+			<Data name="PMC_PP_STATION" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.QueryPmcPpStationBySAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_QUERY_PMC_PP_STATION_EQUIPMENT_ACTION">
+		<Description>获取设备信息</Description>
+		<ActionContext>
+			<Data name="STATION" type="string" />
+			<Data name="PMC_PP_STATION" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.QueryPmcPpStationByEquipmentAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_QUERY_PMC_PP_STATION_CT_ACTION">
+		<Description>查询【生产工位表】</Description>
+		<ActionContext>
+			<Data name="CODE_TYPE" type="string" />
+			<Data name="QURY_TYPE" type="string" />
+			<Data name="PMC_PP_STATION" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.QueryPmcPpStationCtAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_QUERY_PMC_PP_STATION_STOP_ACTION">
+		<Description>查询生产工段下拉列表</Description>
+		<ActionContext>
+			<Data name="CODE_TYPE" type="string" />
+			<Data name="QURY_TYPE" type="string" />
+			<Data name="PMC_PP_STATION" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.QueryTabStationLineStationAllAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_QUERY_TAB_REFER_CT_ACTION">
+		<Description>查询【生产工位表】</Description>
+		<ActionContext>
+			<Data name="CODE_TYPE" type="string" />
+			<Data name="QURY_TYPE" type="string" />
+			<Data name="PMC_PP_STATION" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.QueryTabReferAllAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+
+	
+	<Action id="YQCJ_QUERY_PMC_PP_STATION_CT_ALL_ACTION">
+		<Description>查询【生产工位表tabCycleTime】</Description>
+		<ActionContext>
+			<Data name="CODE_TYPE" type="string" />
+			<Data name="QURY_TYPE" type="string" />
+			<Data name="PMC_PP_STATION" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.QueryPmcPpStationCtAllAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_QUERY_TAB_STOP_STA_ALL_ACTION">
+		<Description>查询【生产工位表】</Description>
+		<ActionContext>
+			<Data name="CODE_TYPE" type="string" />
+			<Data name="QURY_TYPE" type="string" />
+			<Data name="PMC_PP_STATION" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.QueryTabStopStaAllAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+</Config>

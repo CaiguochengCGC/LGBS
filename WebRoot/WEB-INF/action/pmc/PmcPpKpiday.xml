@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+    
+	<Action id="QUERY_PMC_PP_KPIDAY_ACTION">
+		<Description>查询【KPI日报表】</Description>
+		<ActionContext>
+			<Data name="PPDATE" type="string" />
+			<Data name="BANCI" type="string" />
+			<Data name="PMC_PP_KPIDAY" type="array" output="true"/>
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryPmcPpKpidayAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="EXPORT_PMC_PP_KPIDAY_ACTION">
+		<Description>导出【KPI日报表】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PPDATE" type="string" />
+			<Data name="BANCI" type="string" />
+			<Data name="PMC_PP_KPIDAY" type="array" output="true"/>
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.ExportPmcPpKpidayAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+
+	<!--<Action id="QUERY_PLAN_PRODUCT_INFO">-->
+		<!--<Description>查询【计划产量录入报表】</Description>-->
+		<!--<ActionContext>-->
+			<!--<Data name="ID" type="string" />&lt;!&ndash;ID &ndash;&gt;-->
+			<!--<Data name="PlanDate" type="string" />&lt;!&ndash;日期 &ndash;&gt;-->
+			<!--<Data name="LineName" type="string" />  &lt;!&ndash; 线体名称（英文） &ndash;&gt;-->
+			<!--<Data name="Shift" type="string" />  &lt;!&ndash; 班次 &ndash;&gt;-->
+			<!--<Data name="TAB_PLANPRODUCT_EDIT" type="array" output="true"/>-->
+		<!--</ActionContext>-->
+		<!--<ActionParam>-->
+			<!--<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />-->
+			<!--<ActionStep id="2" classname="com.hanthink.pmc.action.QueryPlanProductEditAction" on1Do="next" onOtherDo="3"/>-->
+			<!--<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />-->
+		<!--</ActionParam>-->
+	<!--</Action>-->
+
+</Config>

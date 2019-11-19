@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+
+	<Action id="QUERY_PMC_PP_YY_ACTION">
+		<Description>查询【产量年报表】</Description>
+		<ActionContext>
+			<Data name="YYYY" type="string" /><!-- 日期 -->
+			<Data name="BANCI" type="string" />
+			<Data name="PMC_PP_YY" type="array" output="true"/>
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryPmcPpYyAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="EXPORT_PMC_PP_YY_ACTION">
+		<Description>导出【产量年报表】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="YYYY" type="string" /><!-- 日期 -->
+			<Data name="BANCI" type="string" />
+			<Data name="PMC_PP_YY" type="array" output="true"/>
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.ExportPmcPpYyAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+</Config>

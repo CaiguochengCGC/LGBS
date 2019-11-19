@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+    	
+	<Action id="QUERY_TAB_PRODUCT_HOUR_ACTION">
+		<Description>查询【产量报表】</Description>
+		<ActionContext>
+			<Data name="limit" type="string" />
+			<Data name="start" type="string" />
+			<Data name="EventData" type="string" /><!--日期 -->
+			<Data name="CARNAME" type="string" />  <!-- 车型 -->
+			<Data name="TAB_PRODUCT_HOUR" type="array" output="true"/>
+			<Data name="PRODUCTIONLINENAME" type="string" />
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryTabProductHourAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<!--查询车型-->
+	<Action id="QUERY_PMC_CAR_TYPE_ACTION">
+		<Description>查询【分时产量车型】</Description>
+		<ActionContext>
+			<Data name="CAR_TYPE" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryTabTypeAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<Action id="EXPORT_TAB_PRODUCT_HOUR_ACTION">
+		<Description>导出【产量】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="EventData" type="string" /><!--日期 -->
+			<Data name="carType" type="string" /><!--日期 -->
+			<Data name="TAB_PRODUCT_HOUR" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.ExportTabProductHourAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+</Config>

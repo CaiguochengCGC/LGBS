@@ -1,0 +1,1076 @@
+USE [WebReport_DB]
+GO
+/****** Object:  StoredProcedure [dbo].[USP_GET_PMC_START_RATE]    Script Date: 08/24/2015 09:49:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+---每天的早上8：13分
+-----开动率月报表存储过程    
+ALTER  PROCEDURE  [dbo].[USP_GET_PMC_START_RATE] 
+  @ERROR_TAG   CHAR(1)        OUTPUT,      --错误标志：0.成功,1.错误
+  @ERROR_MSG   NVARCHAR(4000) OUTPUT       --错误信息
+As 
+Begin
+DECLARE  @ACTIME int;--实际生产时间
+DECLARE  @PPRODUCTIONLINE  varchar(1024) ;--线体
+DECLARE  @PPRODUCTIONLINENAME   varchar(1024) ;---线体名称 
+DECLARE  @SEQ	int;--排序规则
+DECLARE  @PSTOPTIME  int;---停机总时间
+DECLARE  @PREALTIME  int;---运行总时间
+DECLARE  @PSTOPTIMETOTL  int;---本月停机总时间
+DECLARE  @PMONTHPLANCOUNT  int;
+DECLARE  @PMONTHREALCOUNT  int;
+DECLARE  @PMONTHRATE numeric(6,2)  ;--本月开动率
+DECLARE  @PPPP  varchar(10);----
+DECLARE  @PDATA2 varchar(10);
+DECLARE  @PDATA3  varchar(10);----
+DECLARE  @PDATA4 varchar(10);
+DECLARE  @PDATA5 varchar(10);
+DECLARE  @PDATA6  varchar(10);
+DECLARE  @PDATA7 varchar(10);
+DECLARE  @PDATA8  varchar(10);
+DECLARE  @PDATA9 varchar(10);
+DECLARE  @PDATA10 varchar(10);
+DECLARE  @PDATA11  varchar(10);----
+DECLARE  @PDATA12 varchar(10);
+DECLARE  @PDATA13  varchar(10);----
+DECLARE  @PDATA14 varchar(10);
+DECLARE  @PDATA15 varchar(10);
+DECLARE  @PDATA16  varchar(10);
+DECLARE  @PDATA17 varchar(10);
+DECLARE  @PDATA   numeric(6,2);
+DECLARE  @PDATA19 varchar(10);
+DECLARE  @PDATA20 varchar(10);
+DECLARE  @PDATA21  varchar(10);----
+DECLARE  @PDATA22 varchar(10);
+DECLARE  @PDATA23  varchar(10);----
+DECLARE  @PDATA24 varchar(10);
+DECLARE  @PDATA25 varchar(10);
+DECLARE  @PDATA26  varchar(10);
+DECLARE  @PDATA27 varchar(10);
+DECLARE  @PDATA28  varchar(10);
+DECLARE  @PDATA29 varchar(10);
+DECLARE  @PDATA30 varchar(10);
+DECLARE  @PDATA31 varchar(10);
+DECLARE  @DDDDDTTTT varchar(1220);
+DECLARE  @tag int;
+BEGIN TRY
+    BEGIN TRANSACTION
+
+DECLARE  cur_data  cursor  for
+Select  distinct PRODUCTIONLINE,PRODUCTIONLINENAME,PSEQ from PMC_PP_STATION  
+--SELECT DISTINCT PRODUCTIONLINE,PRODUCTIONLINENAME FROM  PMC_EQUIPMENT_STOPLINE
+--WHERE CONVERT(varchar(100), convert(datetime, PPDATE), 20) >= CONVERT(varchar(100), dateadd(day,-1,getdate()), 20)  
+ --and CONVERT(varchar(100), convert(datetime, PPDATE), 20) <= CONVERT(varchar(100), getdate(), 20)
+ 
+open  cur_data
+fetch  next  from  cur_data  into  @PPRODUCTIONLINE ,@PPRODUCTIONLINENAME ,@SEQ
+while(@@fetch_status  =  0) 
+begin 
+ select @tag = COUNT(1) from dbo.PMC_PP_START_RATE where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME  and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ if @tag = 0 
+ begin
+   insert into PMC_PP_START_RATE (YEAEMONTH,PRODUCTIONLINE,PRODUCTIONLINENAME,seq)values(SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7),@PPRODUCTIONLINE,@PPRODUCTIONLINENAME,@SEQ)
+ end
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='01'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA1 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='02'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA2 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='03'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA3 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='04'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA4 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='05'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA5 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='06'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA6 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='07'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA7 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='08'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA8 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='09'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA9 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='10'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA10 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='11'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA11 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='12'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA12 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='13'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA13 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='14'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA14 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='15'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA15 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='16'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA16 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='17'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA17 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='18'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA18 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='19'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA19 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='20'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA20 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='21'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA21 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='22'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA22 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='23'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+ 
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA23 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='24'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+ 
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA24 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='25'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA25 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='26'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA26 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='27'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+ 
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA27 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='28'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA28 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='29'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA29 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='30'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+  
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA30 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+if SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),9,10) ='31'
+begin
+
+  SET @DDDDDTTTT = '0.00%' ;
+  SET @PREALTIME = 0 ;
+  
+  SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+  WHERE PRODUCTLINE = @PPRODUCTIONLINE
+  AND CONVERT(VARCHAR(10),PPDATE,20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+  
+  select @PSTOPTIME = SUM(ISNULL(STOPTIME,0))/60 from PMC_EQUIPMENT_STOPLINE 
+  where PRODUCTIONLINE = @PPRODUCTIONLINE 
+  and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  CONVERT(varchar(10), convert(datetime, PPDATE), 20) = CONVERT(varchar(10), dateadd(day,-1,getdate()), 20)
+
+  if @PREALTIME is not null and @PREALTIME !=0  and @PSTOPTIME is not null 
+  begin 
+  SET @PDATA =(@PREALTIME-@PSTOPTIME)/(@PREALTIME+0.0)*100;
+  SET @DDDDDTTTT =CAST(@PDATA as varchar)+'%';
+  end 
+    if @PSTOPTIME is  null and @PREALTIME is not null and   @PREALTIME !=0
+  begin
+     SET @DDDDDTTTT ='100.00%';
+  end 
+  update dbo.PMC_PP_START_RATE set DATA31 = @DDDDDTTTT where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+ 
+end
+
+--停线总时间
+SET @PREALTIME = 0 ;
+SET @PSTOPTIMETOTL = 0 ;
+SET @PMONTHRATE = 0 ;
+select  @PSTOPTIMETOTL  = SUM(ISNULL(STOPTIME,0))/60  from PMC_EQUIPMENT_STOPLINE where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME = @PPRODUCTIONLINENAME and 
+  SUBSTRING(CONVERT(varchar(100), convert(datetime, PPDATE), 23),1,7) = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+
+if @SEQ = 1 or @SEQ = 99
+	--总运行时间
+	SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+	WHERE PRODUCTLINE = 'RL' and PRODUCTLINENAME = 'RL补焊'
+	AND CONVERT(VARCHAR(10),PPDATE,20) >= CONVERT(DATE,DATEADD(mm, DATEDIFF(mm,0,dateadd(day,-1,getdate())), 0),20)
+	AND CONVERT(VARCHAR(10),PPDATE,20) <= CONVERT(DATE,dateadd(ms,-3,DATEADD(mm, DATEDIFF(m,0,dateadd(day,-1,getdate()))+1, 0)),20)
+else
+	--总运行时间
+	SELECT @PREALTIME = SUM(ISNULL(ONEWORKTIME,0)+ISNULL(TWOWORKTIME,0)+ISNULL(THREEWORKTIME,0))*60 FROM PMC_PP_PRODUCT_TIME 
+	WHERE PRODUCTLINE = @PPRODUCTIONLINE and PRODUCTLINENAME = @PPRODUCTIONLINENAME
+	AND CONVERT(VARCHAR(10),PPDATE,20) >= CONVERT(DATE,DATEADD(mm, DATEDIFF(mm,0,dateadd(day,-1,getdate())), 0),20)
+	AND CONVERT(VARCHAR(10),PPDATE,20) <= CONVERT(DATE,dateadd(ms,-3,DATEADD(mm, DATEDIFF(m,0,dateadd(day,-1,getdate()))+1, 0)),20)
+
+--本月开动率
+if @PREALTIME is not  null and @PREALTIME !=0  and @PSTOPTIMETOTL is not null 
+ begin   
+SET @PMONTHRATE =(@PREALTIME-@PSTOPTIMETOTL)/(@PREALTIME+0.0)*100;
+end
+if @PSTOPTIMETOTL is null and @PREALTIME is not  null and @PREALTIME !=0 
+begin   
+SET @PMONTHRATE = 100;
+end
+
+--总实际产量,查询该月第一天到最后一天的产量
+set @PMONTHREALCOUNT = 0;
+
+SELECT @PMONTHREALCOUNT = COUNT(EVENTDATA4) FROM tabProduct
+WHERE 1=1 
+and SUBSTRING(CONVERT(varchar(100), convert(datetime, EventDate), 23),1,7) = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+AND EVENTDATA4 = 0 AND EventData5 = @PPRODUCTIONLINE AND EventData6 = @PPRODUCTIONLINENAME
+if @PMONTHREALCOUNT is null 
+begin
+	set @PMONTHREALCOUNT = 0
+end
+  
+--总计划产量
+SELECT @PMONTHPLANCOUNT = SUM(CONVERT(INT,ISNULL(EventDate31,0))) FROM tabProductHour 
+where  EventDate1 = @PPRODUCTIONLINE AND EventDate30 = @PPRODUCTIONLINENAME
+and SUBSTRING(CONVERT(varchar(100), convert(datetime, EventData), 23),1,7) = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7)
+
+
+update dbo.PMC_PP_START_RATE set MMRATE = @PMONTHRATE,MMSTOPTIME = @PSTOPTIMETOTL ,MMREALP = @PMONTHREALCOUNT,MMPLANP = @PMONTHPLANCOUNT  
+where PRODUCTIONLINE = @PPRODUCTIONLINE and PRODUCTIONLINENAME =@PPRODUCTIONLINENAME
+   and  YEAEMONTH = SUBSTRING(CONVERT(varchar(100), dateadd(day,-1,getdate()), 23),1,7) 
+
+fetch  next  from  cur_data  into  @PPRODUCTIONLINE ,@PPRODUCTIONLINENAME,@SEQ
+end
+close  cur_data
+DEALLOCATE  cur_data
+
+COMMIT TRANSACTION
+  END TRY
+  BEGIN CATCH
+    
+    IF XACT_STATE() <> 0
+    BEGIN
+      ROLLBACK TRANSACTION
+    END
+    
+    SET @ERROR_TAG = '1'
+    SET @ERROR_MSG = ERROR_MESSAGE()    
+   
+  END CATCH
+
+END

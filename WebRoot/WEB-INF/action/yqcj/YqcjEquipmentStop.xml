@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+    
+	<Action id="YQCJ_QUERY_PMC_EQUIPMENT_STOP_ACTION">
+		<Description>查询【工位设备停机表】</Description>
+		<ActionContext>
+			<Data name="PPDATE" type="string" /><!-- 日期 -->
+			<Data name="PRODUCTIONLINENAME" type="string" /><!-- 工段名字-->
+			<Data name="STATION" type="string" /><!-- 工位名字-->
+			<Data name="EQUIPMENTSTOP" type="string" /><!-- 设备名字-->
+			
+			<Data name="QUERY_TYPE" type="string" /><!-- 查询类型 -->
+			<Data name="PMC_EQUIPMENT_STOP" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.QueryPmcEquipmentStopAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_EXPORT_PMC_EQUIPMENT_STOP_ACTION">
+		<Description>导出【工位设备停机表】（日）</Description>
+		<ActionContext>
+			<!--<Data name="HEADER" type="array"/> 列名 
+		    <Data name="COLUMN" type="array"/> 列标 
+		    -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PPDATE" type="string" />
+			<Data name="QUERY_TYPE" type="string" />
+			<Data name="PRODUCTIONLINENAME" type="string" />
+			<Data name="STATION" type="string" /><!-- 工位名字-->
+			<Data name="EQUIPMENTSTOP" type="string" /><!-- 设备名字-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.ExportPmcEquipmentStopAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_EXPORT_PMC_EQUIPMENT_STOP_WEEK_ACTION">
+		<Description>导出【工位设备停机表】（周）</Description>
+		<ActionContext>
+			<!--<Data name="HEADER" type="array"/> 列名 
+		    <Data name="COLUMN" type="array"/> 列标 
+		    -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PPDATE" type="string" />
+			<Data name="QUERY_TYPE" type="string" />
+			<Data name="PRODUCTIONLINENAME" type="string" />
+			<Data name="STATION" type="string" /><!-- 工位名字-->
+			<Data name="EQUIPMENTSTOP" type="string" /><!-- 设备名字-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.ExportPmcEquipmentStopWeekAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_EXPORT_PMC_EQUIPMENT_STOP_MONTH_ACTION">
+		<Description>导出【工位设备停机表】（月）</Description>
+		<ActionContext>
+			<!--<Data name="HEADER" type="array"/> 列名 
+		    <Data name="COLUMN" type="array"/> 列标 
+		    -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PPDATE" type="string" />
+			<Data name="QUERY_TYPE" type="string" />
+			<Data name="PRODUCTIONLINENAME" type="string" />
+			<Data name="STATION" type="string" /><!-- 工位名字-->
+			<Data name="EQUIPMENTSTOP" type="string" /><!-- 设备名字-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.ExportPmcEquipmentStopMonthAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_EXPORT_PMC_EQUIPMENT_STOP_YEAR_ACTION">
+		<Description>导出【工位设备停机表】（年）</Description>
+		<ActionContext>
+			<!--<Data name="HEADER" type="array"/> 列名 
+		    <Data name="COLUMN" type="array"/> 列标 
+		    -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PPDATE" type="string" />
+			<Data name="QUERY_TYPE" type="string" />
+			<Data name="PRODUCTIONLINENAME" type="string" />
+			<Data name="STATION" type="string" /><!-- 工位名字-->
+			<Data name="EQUIPMENTSTOP" type="string" /><!-- 设备名字-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.ExportPmcEquipmentStopYearAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_QUERY_PMC_EQUIPMENT_STOP_OTHERT_ACTION">
+		<Description>查询【瓶颈工位停机时间报表】</Description>
+		<ActionContext>
+			<Data name="PPDATE" type="string" />
+			<Data name="BANCI" type="string" />
+			<Data name="QUERY_TYPE" type="string" />
+			<Data name="PRODUCTIONLINENAME" type="string" />
+			<Data name="PMC_EQUIPMENT_STOP" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.QueryPmcEquipmentStopforProductionLineAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_EXPORT_PMC_EQUIPMENT_STOP_OTHERT_ACTION">
+		<Description>导出【瓶颈工位停机时间报表】（日）</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PPDATE" type="string" />
+			<Data name="BANCI" type="string" /><!--班次-->
+			<Data name="QUERY_TYPE" type="string" />
+			<Data name="PRODUCTIONLINENAME" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.ExportPmcEquipmentStopOthertAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_EXPORT_PMC_EQUIPMENT_STOP_OTHERT_WEEK_ACTION">
+		<Description>导出【瓶颈工位停机时间报表】（周）</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PPDATE" type="string" />
+			<Data name="QUERY_TYPE" type="string" />
+			<Data name="PRODUCTIONLINENAME" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.ExportPmcEquipmentStopOthertWeekAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_EXPORT_PMC_EQUIPMENT_STOP_OTHERT_MONTH_ACTION">
+		<Description>导出【瓶颈工位停机时间报表】（月）</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PPDATE" type="string" />
+			<Data name="QUERY_TYPE" type="string" />
+			<Data name="PRODUCTIONLINENAME" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.ExportPmcEquipmentStopOthertMonthAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_EXPORT_PMC_EQUIPMENT_STOP_OTHERT_YEAR_ACTION">
+		<Description>导出【瓶颈工位停机时间报表】（年）</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PPDATE" type="string" />
+			<Data name="QUERY_TYPE" type="string" />
+			<Data name="PRODUCTIONLINENAME" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.ExportPmcEquipmentStopOthertYearAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+		
+	<Action id="YQCJ_QUERY_PMC_EQUIPMENT_STOP_OTHERC_ACTION">
+		<Description>查询【瓶颈工位停机次数报表】</Description>
+		<ActionContext>
+			<Data name="PPDATE" type="string" />
+			<Data name="QUERY_TYPE" type="string" />
+			<Data name="PRODUCTIONLINENAME" type="string" />
+			<Data name="PMC_EQUIPMENT_STOP" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.QueryPmcEquipmentStopforProductionLineCtAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_EXPORT_PMC_EQUIPMENT_STOP_OTHERC_ACTION">
+		<Description>导出【瓶颈工位停机次数报表】（日）</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PPDATE" type="string" />
+			<Data name="QUERY_TYPE" type="string" />
+			<Data name="PRODUCTIONLINENAME" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.ExportPmcEquipmentStopOthercAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_EXPORT_PMC_EQUIPMENT_STOP_OTHERC_WEEK_ACTION">
+		<Description>导出【瓶颈工位停机次数报表】（周）</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PPDATE" type="string" />
+			<Data name="QUERY_TYPE" type="string" />
+			<Data name="PRODUCTIONLINENAME" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.ExportPmcEquipmentStopOthercWeekAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_EXPORT_PMC_EQUIPMENT_STOP_OTHERC_MONTH_ACTION">
+		<Description>导出【瓶颈工位停机次数报表】（月）</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PPDATE" type="string" />
+			<Data name="QUERY_TYPE" type="string" />
+			<Data name="PRODUCTIONLINENAME" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.ExportPmcEquipmentStopOthercMonthAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_EXPORT_PMC_EQUIPMENT_STOP_OTHERC_YEAR_ACTION">
+		<Description>导出【瓶颈工位停机次数报表】（年）</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PPDATE" type="string" />
+			<Data name="QUERY_TYPE" type="string" />
+			<Data name="PRODUCTIONLINENAME" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.ExportPmcEquipmentStopOthercYearAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+</Config>

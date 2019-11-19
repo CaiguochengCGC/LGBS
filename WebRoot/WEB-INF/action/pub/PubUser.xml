@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dms/action DefAction.xsd">
+    
+    <Action id="LOGIN_ACTION">
+        <Description>用户登陆</Description>
+        <ActionContext>
+            <Data name="USER_NAME" type="string" />
+            <Data name="USER_PWD" type="string" />
+            <Data name="RESULT" type="obejct" output="true" />
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.LoginAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+    <Action id="LOGOUT_ACTION">
+        <Description>退出系统</Description>
+        <ActionContext>
+            <Data name="RESULT" type="string" output="true"/>    
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.LogoutAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+    <Action id="LOGIN_REDIRECT_ACTION">
+        <Description>用户登陆</Description>
+        <ActionContext>
+            <Data name="UserName" type="string" />
+            <Data name="ValidKey" type="string" />
+            <Data name="RESULT" type="obejct" output="true" />
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.LoginRedirectAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+    <Action id="INIT_USER_ACTION">
+        <Description>获取登录用户信息</Description>
+        <ActionContext>
+            <Data name="RESULT" type="object" output="true" />
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.InitUserAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+    
+    <Action id="MODIFY_PUB_USER_PASSWORD_ACTION">
+        <Description>修改用户密码</Description>
+        <ActionContext>
+            <Data name="CURRENT_PASSWORD" type="string" /><!--当前密码-->
+            <Data name="NEW_PASSWORD" type="string" /><!--新密码-->
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.ModifyPubUserPasswordAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+    <Action id="ADD_PUB_USER_ACTION">
+        <Description>添加【用户】</Description>
+        <ActionContext>
+            <Data name="PK_USER_NAME" type="string" /><!--用户名-->
+            <Data name="USER_CNAME" type="string" /><!--用户姓名-->
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.AddPubUserAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    <Action id="UPDATE_PUB_USER_ACTION">
+        <Description>修改【用户】</Description>
+        <ActionContext>
+            <Data name="PK_USER_NAME" type="string" /><!--用户名-->
+            <Data name="USER_CNAME" type="string" /><!--用户姓名-->
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.UpdatePubUserAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    <Action id="DELETE_PUB_USER_ACTION">
+        <Description>删除【用户】</Description>
+        <ActionContext>
+            <Data name="PK_USER_NAME" type="string" /><!--用户名-->
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.DeletePubUserAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+    <Action id="RESER_PUB_USER_PASSWORD_ACTION">
+        <Description>重置用户密码</Description>
+        <ActionContext>
+            <Data name="PK_USER_NAME" type="string" /><!--用户名-->
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.ResetUserPasswordAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+    <Action id="QUERY_PUB_USERBY_PAGER_ACTION">
+        <Description>分页查询【用户】</Description>
+        <ActionContext>
+            <Data name="limit" type="string" />
+            <Data name="start" type="string" />
+            <Data name="PK_USER_NAME" type="string" />
+            <Data name="USER_CNAME" type="string" />
+            <Data name="PUB_USER" type="array" output="true"/>
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.QueryPubUserByPagerAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+</Config>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dms/action DefAction.xsd">
+    
+	<Action id="GET_MENU_ACTION">
+        <Description>加载菜单</Description>
+        <ActionContext>
+            <Data name="MODULE_CODE" type="string" />
+            <Data name="MENU" type="array" output="true"/>
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.GetUserMenuAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+    <Action id="QUERY_PUB_PRIVILEGESBY_PAGER_ACTION">
+        <Description>分页查询【权限】</Description>
+        <ActionContext>
+            <Data name="limit" type="string" />
+            <Data name="start" type="string" />
+            <Data name="Q_TYPE" type="string" /><!--权限类型-->
+            <Data name="Q_CONTENT" type="string" /><!--权限内容-->
+            <Data name="Q_DESCRIPTION" type="string" /><!--权限描述-->
+            <Data name="Q_CATEGORY" type="string" /><!--分类-->
+            <Data name="PK_ROLE_ID" type="string" />
+            <Data name="PUB_PRIVILEGES" type="array" output="true"/>
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.QueryPubPrivilegesByPagerAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+</Config>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dms/action DefAction.xsd">
+    
+	<Action id="ADD_PUB_ROLE_ACTION">
+		<Description>添加【角色】</Description>
+		<ActionContext>
+			<Data name="ROLE_NAME" type="string" /><!--角色名称-->
+			<Data name="ROLE_DESCRIPTION" type="string" /><!--角色描述-->
+            <Data name="PUB_ROLE" type="object" output="true"/>
+		</ActionContext>
+		<ActionParam>ADD_WORK_DATE_ACTION</ActionParam>
+	</Action>
+    
+	<Action id="UPDATE_PUB_ROLE_ACTION">
+		<Description>修改【角色】</Description>
+		<ActionContext>
+			<Data name="PK_ROLE_ID" type="string" /><!--角色编号-->
+			<Data name="ROLE_NAME" type="string" /><!--角色名称-->
+			<Data name="ROLE_DESCRIPTION" type="string" /><!--角色描述-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pub.action.UpdatePubRoleAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+    
+	<Action id="DELETE_PUB_ROLE_ACTION">
+		<Description>删除【角色】</Description>
+		<ActionContext>
+			<Data name="PK_ROLE_ID" type="string" /><!--角色编号-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pub.action.DeletePubRoleAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+    
+	<Action id="QUERY_PUB_ROLEBY_PAGER_ACTION">
+		<Description>分页查询【角色】</Description>
+		<ActionContext>
+			<Data name="ROLE_NAME" type="string" />
+			<Data name="PK_USER_NAME" type="string" />
+            <Data name="start" type="string" />
+            <Data name="limit" type="string" />
+			<Data name="PUB_ROLE" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pub.action.QueryPubRoleByPagerAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+
+    
+</Config>

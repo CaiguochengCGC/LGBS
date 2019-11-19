@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+    	
+	<Action id="QUERY_PMC_DATE_IMPORT_ACTION">
+		<Description>查询【计划日期数量导入】</Description>
+		<ActionContext>
+			<Data name="WORKDATE" type="string" />
+			<Data name="PMC_DATE_IMPORT" type="array" output="true"/>
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryPmcDateImportAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="QUERY_PMC_DATE_IMPORTANDPP_ACTION">
+		<Description>查询【计划日期数量导入】</Description>
+		<ActionContext>
+			<Data name="WORKDATE" type="string" />
+			<Data name="PMC_DATE_IMPORT" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryPmcDateImportAndPpAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="QUERY_PMC_DATE_IMPORT_IMPORT_ACTION">
+		<Description>查询【计划日期数量导入】</Description>
+		<ActionContext>
+			<Data name="START_PLAN_DATE" type="string" /><!-- 生产开始日期 -->
+			<Data name="END_PLAN_DATE" type="string" /><!-- 生产结束日期 -->
+			<Data name="SHIFT" type="string" /><!-- 工段 -->
+			<Data name="PMC_DATE_IMPORT" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryPmcDateImportImportAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="ADD_PMC_DATE_IMPORT_ACTION">
+		<Description>添加【计划日期数量导入】</Description>
+		<ActionContext>
+			<Data name="FACTORY" type="string" /><!--工厂-->
+			<Data name="WORKSHOP" type="string" /><!--车间-->
+			<Data name="SHIFT" type="string" /><!--SHIFT-->
+			<Data name="WORKDATE" type="string" /><!--生产日期-->
+			<Data name="STARTTIME" type="string" /><!--工作开始时间-->
+			<Data name="ENDTIME" type="string" /><!--工作结束时间-->
+			<Data name="RESTTIME" type="string" /><!--休息时间-->
+			<Data name="IP21" type="string" /><!--IP21计划产量-->
+			<Data name="IP22" type="string" /><!--IP22计划产量-->
+			<Data name="IP23" type="string" /><!--IP23计划产量-->
+			<Data name="ZP11" type="string" /><!--ZP11计划产量-->
+			<Data name="BP31" type="string" /><!--BP31计划产量-->
+			<Data name="IP24" type="string" /><!--IP24计划产量-->
+			<Data name="BP32" type="string" /><!--BP32计划产量-->
+			<Data name="AS21" type="string" /><!--AS21计划产量-->
+			<Data name="OTHER" type="string" /><!--OTHER计划产量-->
+			<Data name="productTotal" type="string" /><!--总产量-->
+			<Data name="REMARK" type="string" /><!--备注-->
+			<Data name="OPERUSER" type="string" /><!--操作用户-->
+			<Data name="UPDATETIME" type="string" /><!--最后修改时间-->
+			<Data name="PMC_DATE_IMPORT" type="object" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.AddPmcDateImportAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="UPDATE_PMC_DATE_IMPORT_ACTION">
+		<Description>修改【计划日期数量导入】</Description>
+		<ActionContext>
+			<Data name="ID" type="string" /><!--ID-->
+			<Data name="FACTORY" type="string" /><!--工厂-->
+			<Data name="WORKSHOP" type="string" /><!--车间-->
+			<Data name="SHIFT" type="string" /><!--SHIFT-->
+			<Data name="WORKDATE" type="string" /><!--生产日期-->
+			<Data name="STARTTIME" type="string" /><!--工作开始时间-->
+			<Data name="ENDTIME" type="string" /><!--工作结束时间-->
+			<Data name="RESTTIME" type="string" /><!--休息时间-->
+			<Data name="IP21" type="string" /><!--IP21计划产量-->
+			<Data name="IP22" type="string" /><!--IP22计划产量-->
+			<Data name="IP23" type="string" /><!--IP23计划产量-->
+			<Data name="ZP11" type="string" /><!--ZP11计划产量-->
+			<Data name="BP31" type="string" /><!--BP31计划产量-->
+			<Data name="IP24" type="string" /><!--IP24计划产量-->
+			<Data name="BP32" type="string" /><!--BP32计划产量-->
+			<Data name="AS21" type="string" /><!--AS21计划产量-->
+			<Data name="OTHER" type="string" /><!--OTHER计划产量-->
+			<Data name="productTotal" type="string" /><!--总产量-->
+			<Data name="REMARK" type="string" /><!--备注-->
+			<Data name="OPERUSER" type="string" /><!--操作用户-->
+			<Data name="UPDATETIME" type="string" /><!--最后修改时间-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.UpdatePmcDateImportAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="DELETE_PMC_DATE_IMPORT_ACTION">
+		<Description>删除【计划日期数量导入】</Description>
+		<ActionContext>
+			<Data name="ID" type="array" /><!--ID-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.DeletePmcDateImportAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="SAVE_PMC_DATE_IMPORT_ACTION">
+		<Description>批量处理【计划日期数量导入】</Description>
+		<ActionContext>
+			<Data name="PMC_DATE_IMPORT_FILE" type="file" /><!--file-->
+			<Data name="FACTORY" type="string" /><!--工厂-->
+			<Data name="WORKSHOP" type="string" /><!--车间-->
+            <Data name="PMC_DATE_IMPORT_INFO" type="string" output="true"/><!--info-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.SavePmcDateImportAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="EXPORT_PMC_DATE_IMPORT_ACTION">
+		<Description>查询【计划日期数量导入】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="START_PLAN_DATE" type="string" /><!-- 生产开始日期 -->
+			<Data name="END_PLAN_DATE" type="string" /><!-- 生产结束日期 -->
+			<Data name="SHIFT" type="string" /><!-- 工段 -->
+			<Data name="PMC_DATE_IMPORT" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.ExportPmcDateImportAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+</Config>

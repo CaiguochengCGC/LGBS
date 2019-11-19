@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dms/action DefAction.xsd">
+    
+    <Action id="INIT_CODE_VALUE_ACTION">
+        <Description>根据类型查询数据字典（登录页获取）</Description>
+        <ActionContext>
+            <Data name="CODE_TYPE" type="string" /><!--类型-->
+            <Data name="CODE_VALUE" type="string" /><!--值-->
+            <Data name="PUB_DATA_DICT" type="array" output="true"/>
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.QueryPubDataDictAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+	<Action id="GET_CODE_VALUE_ACTION">
+		<Description>根据类型查询数据字典</Description>
+		<ActionContext>
+		    <Data name="CODE_TYPE" type="string" /><!--类型-->
+            <Data name="CODE_VALUE" type="string" /><!--值-->
+            <Data name="QUERY_TYPE" type="string" /><!--类型-->
+			<Data name="PUB_DATA_DICT" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pub.action.QueryPubDataDictAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+    
+    <Action id="ADD_PUB_DATA_DICT_ACTION" validate="true">
+        <Description>添加【基础参数维护】</Description>
+        <ActionContext>
+            <Data name="CODE_TYPE" type="string" rules="required" a="类型"/><!--类型-->
+            <Data name="CODE_TYPE_NAME" type="string" rules="required" a="类型名称"/><!--类型名称-->
+            <Data name="CODE_VALUE" type="string" rules="required" a="编码"/><!--编码-->
+            <Data name="CODE_VALUE_NAME" type="string" rules="required" a="编码名称"/><!--编码名称-->
+            <Data name="OTHER_CODE_VALUE1" type="string" /><!--第三方系统代码-->
+            <Data name="IS_EDIT" type="string" rules="required" a="是否可编辑"/><!--是否可编辑-->
+            <Data name="CODE_DESC" type="string" /><!--备注-->
+            <Data name="SORT_NO" type="string" /><!--显示顺序-->
+            <Data name="COMPARE" type="string" /><!--停线标准时间-->
+            <Data name="PUB_DATA_DICT" type="object" output="true"/>
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.AddPubDataDictAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    <Action id="UPDATE_PUB_DATA_DICT_ACTION">
+        <Description>修改【基础参数维护】</Description>
+        <ActionContext>
+            <Data name="PK_ID" type="string" rules="required" a="PK_ID"/><!--主键(新增)-->
+            <Data name="CODE_TYPE_NAME" type="string" /><!--类型名称-->
+            <Data name="CODE_VALUE" type="string" /><!--编码-->
+            <Data name="CODE_VALUE_NAME" type="string" /><!--编码名称-->
+            <Data name="OTHER_CODE_VALUE1" type="string" /><!--第三方系统代码-->
+            <Data name="CODE_DESC" type="string" /><!--备注-->
+            <Data name="SORT_NO" type="string" /><!--显示顺序-->
+            <Data name="COMPARE" type="string" /><!--停线标准时间-->
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.UpdatePubDataDictAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    <Action id="DELETE_PUB_DATA_DICT_ACTION">
+        <Description>删除【基础参数维护】</Description>
+        <ActionContext>
+            <Data name="PK_ID" type="array" /><!-- 主键ID（新增） -->
+            <Data name="CODE_TYPE" type="array" /><!--类型-->
+            <Data name="CODE_VALUE" type="array" /><!--编码-->
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.DeletePubDataDictAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+    <Action id="QUERY_PUB_DATA_DICTBY_PAGER_ACTION">
+        <Description>分页查询【基础参数维护】</Description>
+        <ActionContext>
+            <Data name="limit" type="string" />
+            <Data name="start" type="string" />
+            <Data name="codeTypeName" type="string" /><!--类型-->
+            <Data name="codeValueName" type="string" /><!--编码-->
+            <Data name="PUB_DATA_DICT" type="array" output="true"/>
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.QueryPubDataDictByPagerAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+</Config>

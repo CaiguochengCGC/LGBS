@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<mapping>
+	<class name="com.hanthink.yqcj.po.PmcDatePpPO" table="YQCJ_DATE_PP">
+		<property name="id" type="java.lang.Integer">
+			<column name="ID"/>
+		</property>
+		<property name="factory" type="java.lang.String">
+			<column name="FACTORY"/>
+		</property>
+		<property name="workshop" type="java.lang.String">
+			<column name="WORKSHOP"/>
+		</property>
+		<property name="fproductionline" type="java.lang.String">
+			<column name="FPRODUCTIONLINE"/>
+		</property>
+		<property name="productionline" type="java.lang.String">
+			<column name="PRODUCTIONLINE"/>
+		</property>
+		<property name="productionlinename" type="java.lang.String">
+			<column name="PRODUCTIONLINENAME"/>
+		</property>
+		<property name="workdate" type="java.util.Date">
+			<column name="WORKDATE"/>
+		</property>
+		<property name="shift1" type="java.lang.String">
+			<column name="SHIFT1"/>
+		</property>
+		<property name="starttime1" type="java.util.Date">
+			<column name="STARTTIME1"/>
+		</property>
+		<property name="endtime1" type="java.util.Date">
+			<column name="ENDTIME1"/>
+		</property>
+		<property name="shift2" type="java.lang.String">
+			<column name="SHIFT2"/>
+		</property>
+		<property name="starttime2" type="java.util.Date">
+			<column name="STARTTIME2"/>
+		</property>
+		<property name="endtime2" type="java.util.Date">
+			<column name="ENDTIME2"/>
+		</property>
+		<property name="shift3" type="java.lang.String">
+			<column name="SHIFT3"/>
+		</property>
+		<property name="starttime3" type="java.util.Date">
+			<column name="STARTTIME3"/>
+		</property>
+		<property name="endtime3" type="java.util.Date">
+			<column name="ENDTIME3"/>
+		</property>
+		<property name="remark" type="java.lang.String">
+			<column name="REMARK"/>
+		</property>
+		<property name="operuser" type="java.lang.String">
+			<column name="OPERUSER"/>
+		</property>
+		<property name="updatetime" type="java.util.Date">
+			<column name="UPDATETIME"/>
+		</property>
+	</class>
+</mapping>

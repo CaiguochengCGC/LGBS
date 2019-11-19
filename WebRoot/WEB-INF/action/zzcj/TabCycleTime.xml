@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+    	
+	<Action id="ZZCJ_QUERY_TAB_CYCLE_TIME_ACTION">
+		<Description>查询【节拍】</Description>
+		<ActionContext>
+			<Data name="limit" type="string" />
+			<Data name="start" type="string" />
+			<Data name="EventDate14" type="string" /><!-- 线体英文名 -->
+			<Data name="EventDate1" type="string" /><!-- 工位 -->
+			<Data name="EventDate2" type="string" /><!-- 班次 -->
+			<Data name="WORKDATE" type="string" /><!-- 日期 -->
+			<Data name="TAB_CYCLE_TIME" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.zzcj.action.QueryTabCycleTimeAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="ZZCJ_QUERY_TAB_CYCLE_TIME_BY_RAND_ACTION">
+		<Description>随机查询【工位总览】</Description>
+		<ActionContext>
+			<Data name="EventDate14" type="string" /><!-- 线体英文名 -->
+			<Data name="EventDate1" type="string" /><!-- 工位 -->
+			<Data name="EventData" type="string" /><!-- 日期 -->
+			<Data name="TAB_CYCLE_TIME" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.zzcj.action.QueryTabCycleTimeByRandAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="ZZCJ_EXPORT_TAB_CYCLE_TIME_BY_RAND_ACTION">
+		<Description>导出【工位总览】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="EventDate14" type="string" /><!-- 线体英文名 -->
+			<Data name="EventDate1" type="string" /><!-- 工位 -->
+			<Data name="EventData" type="string" /><!-- 日期 -->
+			<Data name="TAB_CYCLE_TIME" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.zzcj.action.ExportTabCycleTimeByRandAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="ZZCJ_EXPORT_TAB_CYCLE_TIME_BY_BEAT_ACTION">
+		<Description>导出【节拍报表】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="EventDate14" type="string" /><!-- 线体英文名 -->
+			<Data name="EventDate1" type="string" /><!-- 工位 -->
+			<Data name="EventDate2" type="string" /><!-- 班次 -->
+			<Data name="WORKDATE" type="string" /><!-- 日期 -->
+			<Data name="TAB_CYCLE_TIME" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.zzcj.action.ExportTabCycleTimeByBeatAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+</Config>
+	

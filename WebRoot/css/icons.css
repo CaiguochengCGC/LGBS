@@ -1,0 +1,154 @@
+@CHARSET "UTF-8";
+.forward {
+	background: url(../IMAGE/forward.gif) left center no-repeat !important;
+}
+.application_view_columns {
+	background: url(../images/application_view_columns.png) left center no-repeat !important;
+}
+.icon-mark-complete {
+	background: url(../images/icon-mark-complete.gif) left center no-repeat !important;
+}
+.cart_put {
+	background: url(../images/cart_put.png) left center no-repeat !important;
+}
+.qm_out {
+	background: url(../images/qm_out.bmp) left center no-repeat !important;
+}
+.large-loading {
+    background:url(../lib/ext-3.3.0/resources/images/default/shared/large-loading.gif)  left center no-repeat !important ;
+}
+.text_signature {
+	background: url(../images/text_signature.png) left center no-repeat !important;
+}
+.email_send {
+	background: url(../images/email_send.png) left center no-repeat !important;
+}
+.message {
+	background: url(../images/message.png) left center no-repeat !important;
+}
+.checked {
+	background: url(../images/checked.gif) left center no-repeat !important;
+}
+.cross {
+    background: url(../images/cross.gif) left center no-repeat !important;
+}
+.query {
+	background: url(../images/query.png) left center no-repeat !important;
+}
+
+.query-small {
+    background: url(../images/magnifier.png) 1px 1px no-repeat !important;
+}
+
+.car {
+	background: url(../images/car.png) left center no-repeat !important;
+}
+.add {
+	background: url(../images/add.png) left center no-repeat !important;
+}
+.modify {
+	background: url(../images/modify.png) left center no-repeat !important;
+}
+.delete {
+	background: url(../images/delete2.gif) left center no-repeat !important;
+}
+.pdf {
+	background: url(../images/pdf.png) left center no-repeat !important;
+}
+.excel {
+	background: url(../images/excel.png) left center no-repeat !important;
+}
+.print {
+	background: url(../images/print.png) left center no-repeat !important;
+}
+.accept {
+	background: url(../images/accept.png) left center no-repeat !important;
+}
+.save {
+	background: url(../images/save.png) left center no-repeat !important;
+}
+.reset {
+	background: url(../images/reset.png) left center no-repeat !important;
+}
+.chart_bar {
+	background: url(../images/chart_bar.png) left center no-repeat !important;
+}
+.chart_line {
+	background: url(../images/chart_line.png) left center no-repeat !important;
+}
+.chart_pie {
+	background: url(../images/chart_pie.png) left center no-repeat !important;
+}
+.qm_in {
+	background: url(../images/qm_in.bmp) left center no-repeat !important;
+}
+.tab {
+	background: url(../images/new_tab.gif) left center no-repeat !important;
+}
+.grid {
+	background: url(../images/grid.png) left center no-repeat !important;
+}
+.menu {
+	background: url(../images/plugin.gif) left center no-repeat !important;
+}
+.title
+{
+	background-color: #000079
+}
+.quit {
+	background: url(../images/user_go.png) left center no-repeat !important;
+}
+.date {
+	background: url(../images/date.png) left center no-repeat !important;
+}
+.help {
+	background: url(../images/help.png) left center no-repeat !important;
+}
+.link {
+	background: url(../images/lorry_go.png) left center no-repeat !important;
+}
+.user {
+	background: url(../images/user.png) left center no-repeat !important;
+}
+.table_refresh{
+	background: url(../images/table_refresh.png) left center no-repeat !important;
+}
+.forward{
+	background: url(../images/forward.gif) left center no-repeat !important;
+}
+.calculate{
+	background: url(../images/calculator.png) left center no-repeat !important;
+}
+.logout{
+	background: url(../images/door_out.png) left center no-repeat !important;
+}
+.modifyPsd{
+    background: url(../images/logout.png) left center no-repeat !important;
+}
+.edit{
+	background: url(../images/edit.gif) left center no-repeat !important;
+}
+
+.exclamation{
+    background: url(../images/exclamation.gif) left center no-repeat !important;
+}
+
+.to_deal_with{
+    background: url(../images/accept (2).png) left center no-repeat !important;
+}
+
+.up{
+    background: url(../images/arrow-up.gif) left center no-repeat !important;
+}
+
+.down{
+    background: url(../images/arrow-down.gif) left center no-repeat !important;
+}
+
+.lock{
+    background: url(../images/hmenu-lock.gif) left center no-repeat !important;
+}
+
+.unlock{
+    background: url(../images/hmenu-unlock.gif) left center no-repeat !important;
+}

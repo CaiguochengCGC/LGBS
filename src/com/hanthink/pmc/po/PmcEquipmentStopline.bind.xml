@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<mapping>
+	<class name="com.hanthink.pmc.po.PmcEquipmentStoplinePO" table="PMC_EQUIPMENT_STOPLINE">
+		<property name="id" type="java.lang.Integer">
+			<column name="ID"/>
+		</property>
+		<property name="ppdate" type="java.util.Date">
+			<column name="PPDATE"/>
+		</property>
+		<property name="factory" type="java.lang.String">
+			<column name="FACTORY"/>
+		</property>
+		<property name="workshop" type="java.lang.String">
+			<column name="WORKSHOP"/>
+		</property>
+		<property name="fproductionline" type="java.lang.String">
+			<column name="FPRODUCTIONLINE"/>
+		</property>
+		<property name="productionline" type="java.lang.String">
+			<column name="PRODUCTIONLINE"/>
+		</property>
+		<property name="productionlinename" type="java.lang.String">
+			<column name="PRODUCTIONLINENAME"/>
+		</property>
+		<property name="stoptime" type="java.lang.Integer">
+			<column name="STOPTIME"/>
+		</property>
+		<property name="stopcount" type="java.lang.Integer">
+			<column name="STOPCOUNT"/>
+		</property>
+		<property name="data3" type="java.lang.Integer">
+			<column name="DATA3"/>
+		</property>
+		<property name="data4" type="java.lang.Integer">
+			<column name="DATA4"/>
+		</property>
+		<property name="data5" type="java.lang.Integer">
+			<column name="DATA5"/>
+		</property>
+		<property name="data6" type="java.lang.Integer">
+			<column name="DATA6"/>
+		</property>
+		<property name="data7" type="java.lang.Integer">
+			<column name="DATA7"/>
+		</property>
+		<property name="shift" type="java.lang.String">
+			<column name="SHIFT"/>
+		</property>
+		<property name="operuser" type="java.lang.String">
+			<column name="OPERUSER"/>
+		</property>
+		<property name="updatetime" type="java.util.Date">
+			<column name="UPDATETIME"/>
+		</property>
+	</class>
+</mapping>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dms/action DefAction.xsd">
+	
+	<Action id="QUERY_PUB_ROLE_PRIVILEGESBY_PAGER_ACTION">
+		<Description>分页查询【角色权限关系】</Description>
+		<ActionContext>
+			<Data name="limit" type="string" />
+			<Data name="start" type="string" />
+            <Data name="DESCRIPTION" type="string" />
+            <Data name="CATEGORY" type="string" />
+			<Data name="PK_ROLE_ID" type="string" /><!--角色编号-->
+			<Data name="PUB_ROLE_PRIVILEGES" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pub.action.QueryPubRolePrivilegesByPagerAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+    
+    <Action id="SAVE_PUB_ROLE_PRIVILEGES_ACTION">
+        <Description>批量保存、删除【用户角色关系】</Description>
+        <ActionContext>
+            <Data name="PK_ROLE_ID" type="string" />
+            <Data name="PK_PRIVILEGES_ID" type="array"/>
+            <Data name="CMD" type="string"/>
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.SavePubRolePrivilegesAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+
+</Config>

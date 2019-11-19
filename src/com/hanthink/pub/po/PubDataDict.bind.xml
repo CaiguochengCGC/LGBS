@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<mapping>
+	<class name="com.hanthink.pub.po.PubDataDictPO" table="PUB_DATA_DICT">
+	    <property name="pkId" type="java.lang.String">
+			<column name="PK_ID"/>
+		</property>
+		<property name="codeType" type="java.lang.String">
+			<column name="CODE_TYPE"/>
+		</property>
+		<property name="codeTypeName" type="java.lang.String">
+			<column name="CODE_TYPE_NAME"/>
+		</property>
+		<property name="codeValue" type="java.lang.String">
+			<column name="CODE_VALUE"/>
+		</property>
+		<property name="codeValueName" type="java.lang.String">
+			<column name="CODE_VALUE_NAME"/>
+		</property>
+		<property name="otherCodeValue1" type="java.lang.String">
+			<column name="OTHER_CODE_VALUE1"/>
+		</property>
+		<property name="isEdit" type="java.lang.Integer">
+			<column name="IS_EDIT"/>
+		</property>
+		<property name="codeDesc" type="java.lang.String">
+			<column name="CODE_DESC"/>
+		</property>
+		<property name="sortNo" type="java.lang.Integer">
+			<column name="SORT_NO"/>
+		</property>
+		<property name="compare" type="java.lang.Integer">
+			<column name="COMPARE"/>
+		</property>
+		<property name="lastUpdateUsername" type="java.lang.String">
+			<column name="LAST_UPDATE_USERNAME"/>
+		</property>
+		<property name="lastUpdateIp" type="java.lang.String">
+			<column name="LAST_UPDATE_IP"/>
+		</property>
+		<property name="lastUpdateTime" type="java.util.Date">
+			<column name="LAST_UPDATE_TIME"/>
+		</property>
+		<property name="createTime" type="java.util.Date">
+			<column name="CREATE_TIME"/>
+		</property>
+	</class>
+</mapping>

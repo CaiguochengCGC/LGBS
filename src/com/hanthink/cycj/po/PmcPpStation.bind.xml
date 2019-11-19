@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<mapping>
+	<class name="com.hanthink.cycj.po.PmcPpStationPO" table="CYCJ_PP_STATION">
+		<property name="id" type="java.lang.Integer">
+			<column name="ID"/>
+		</property>
+		<property name="factory" type="java.lang.String">
+			<column name="FACTORY"/>
+		</property>
+		<property name="workshop" type="java.lang.String">
+			<column name="WORKSHOP"/>
+		</property>
+		<property name="fproductionline" type="java.lang.String">
+			<column name="FPRODUCTIONLINE"/>
+		</property>
+		<property name="productionline" type="java.lang.String">
+			<column name="PRODUCTIONLINE"/>
+		</property>
+		<property name="productionlinename" type="java.lang.String">
+			<column name="PRODUCTIONLINENAME"/>
+		</property>
+		<property name="station" type="java.lang.String">
+			<column name="STATION"/>
+		</property>
+		<property name="remark" type="java.lang.String">
+			<column name="REMARK"/>
+		</property>
+		<property name="operuser" type="java.lang.String">
+			<column name="OPERUSER"/>
+		</property>
+		<property name="updatetime" type="java.util.Date">
+			<column name="UPDATETIME"/>
+		</property>
+		<property name="pseq" type="java.lang.String">
+			<column name="PSEQ"/>
+		</property>
+	</class>
+</mapping>

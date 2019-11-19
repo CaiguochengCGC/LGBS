@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<mapping>
+	<class name="com.hanthink.pmc.po.TabCycleTimePO" table="tabCycleTime">
+		<property name="rid" type="java.lang.Integer">
+			<column name="Rid"/>
+		</property>
+		<property name="eventType" type="java.lang.String">
+			<column name="EventType"/>
+		</property>
+		<property name="eventData" type="java.lang.String">
+			<column name="EventData"/>
+		</property>
+		<property name="eventData1" type="java.lang.String">
+			<column name="EventDate1"/>
+		</property>
+		<property name="eventData2" type="java.lang.String">
+			<column name="EventDate2"/>
+		</property>
+		<property name="eventData3" type="java.lang.String">
+			<column name="EventDate3"/>
+		</property>
+		<property name="eventData4" type="java.lang.String">
+			<column name="EventDate4"/>
+		</property>
+		<property name="eventData5" type="java.lang.String">
+			<column name="EventDate5"/>
+		</property>
+		<property name="eventData6" type="java.lang.String">
+			<column name="EventDate6"/>
+		</property>
+		<property name="eventData7" type="java.lang.String">
+			<column name="EventDate7"/>
+		</property>
+		<property name="eventData8" type="java.lang.String">
+			<column name="EventDate8"/>
+		</property>
+		<property name="eventData9" type="java.lang.String">
+			<column name="EventDate9"/>
+		</property>
+		<property name="eventData10" type="java.lang.String">
+			<column name="EventDate10"/>
+		</property>
+		<property name="eventData11" type="java.lang.String">
+			<column name="EventDate11"/>
+		</property>
+		<property name="eventData12" type="java.lang.String">
+			<column name="EventDate12"/>
+		</property>
+		<property name="eventData13" type="java.lang.String">
+			<column name="EventDate13"/>
+		</property>
+		<property name="eventData14" type="java.lang.String">
+			<column name="EventDate14"/>
+		</property>
+		<property name="eventData15" type="java.lang.String">
+			<column name="EventDate15"/>
+		</property>
+	</class>
+</mapping>

@@ -1,0 +1,46 @@
+<Config xmlns="http://dms/action"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dms/action DefAction.xsd">
+    
+    <Action id="INIT_SYSPARAM_ACTION">
+        <Description>初始化系统参数</Description>
+        <ActionContext>
+            <Data name="PARAM_CODE" type="array"/>
+            <Data name="SYS_PARAM" type="array" output="true"/>
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.InitSysParamAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    
+    <Action id="UPDATE_SYS_PARAM_ACTION">
+        <Description>修改【SYS_PARAM系统参数】</Description>
+        <ActionContext>
+            <Data name="PARAM_CODE" type="string" /><!--参数代码-->
+            <Data name="PARAM_VAL" type="string" /><!--参数值-->
+            <Data name="NOTE" type="string" /><!--备注-->
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.UpdateSysParamAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+
+    <Action id="QUERY_SYS_PARAMBY_PAGER_ACTION">
+        <Description>分页查询【SYS_PARAM系统参数】</Description>
+        <ActionContext>
+            <Data name="limit" type="string" />
+            <Data name="start" type="string" />
+            <Data name="SYS_PARAM" type="array" output="true"/>
+        </ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.pub.action.QuerySysParamByPagerAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+		
+</Config>

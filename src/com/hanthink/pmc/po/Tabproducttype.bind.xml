@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<mapping>
+	<class name="com.hanthink.pmc.po.TabproducttypePO" table="tabProductType">
+		<property name="rid" type="java.lang.String">
+			<column name="Rid"/>
+		</property>
+		<property name="eventdata" type="java.lang.String">
+			<column name="EventData"/>
+		</property>
+		<property name="eventdata1" type="java.lang.String">
+			<column name="EventData1"/>
+		</property>
+		<property name="eventdata2" type="java.lang.String">
+			<column name="EventData2"/>
+		</property>
+		<property name="eventdata3" type="java.lang.String">
+			<column name="EventData3"/>
+		</property>
+		<property name="eventdata4" type="java.lang.String">
+			<column name="EventData4"/>
+		</property>
+		<property name="eventdata5" type="java.lang.String">
+			<column name="EventData5"/>
+		</property>
+		<property name="eventdata6" type="java.lang.String">
+			<column name="EventData6"/>
+		</property>
+		<property name="eventdata7" type="java.lang.String">
+			<column name="EventData7"/>
+		</property>
+		<property name="eventdata8" type="java.lang.String">
+			<column name="EventData8"/>
+		</property>
+		<property name="eventdata9" type="java.lang.String">
+			<column name="EventData9"/>
+		</property>
+		<property name="eventdata10" type="java.lang.String">
+			<column name="EventData10"/>
+		</property>
+		<property name="eventdata11" type="java.lang.String">
+			<column name="EventData11"/>
+		</property>
+		<property name="eventdata12" type="java.lang.String">
+			<column name="EventData12"/>
+		</property>
+		<property name="eventdata13" type="java.lang.String">
+			<column name="EventData13"/>
+		</property>
+		<property name="eventdata14" type="java.lang.String">
+			<column name="EventData14"/>
+		</property>
+		<property name="eventdata15" type="java.lang.String">
+			<column name="EventData15"/>
+		</property>
+		<property name="eventdata16" type="java.lang.String">
+			<column name="EventData16"/>
+		</property>
+		<property name="eventdata17" type="java.lang.String">
+			<column name="EventData17"/>
+		</property>
+		<property name="eventdata18" type="java.lang.String">
+			<column name="EventData18"/>
+		</property>
+		<property name="eventdata19" type="java.lang.String">
+			<column name="EventData19"/>
+		</property>
+		<property name="column22" type="java.lang.String">
+			<column name="Column_22"/>
+		</property>
+	</class>
+</mapping>

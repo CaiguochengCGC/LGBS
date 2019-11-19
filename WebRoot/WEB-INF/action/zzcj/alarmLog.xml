@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+    	
+	<Action id="ZZCJ_QUERY_ALARM_LOG_ACTION">
+		<Description>查询【故障事件】</Description>
+		<ActionContext>
+			<Data name="limit" type="string" />
+			<Data name="start" type="string" />
+			<Data name="START_EFFECT_TIME" type="string"/><!-- 开始日期 --> 
+			<Data name="END_EFFECT_TIME" type="string"/><!-- 结束时间 --> 
+			<Data name="PRODUCTIONLINENAME" type="string"/><!-- 工段名字--> 
+			<Data name="BANCI" type="string"/><!-- 工位 --> 
+			<Data name="DATA3" type="string"/><!-- 属性 -->
+			<Data name="ALARM_LOG" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.zzcj.action.QueryAlarmLogAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="ZZCJ_EXPORT_ALARM_LOG_ACTION">
+		<Description>导出【故障事件】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PRODUCTIONLINENAME" type="string" /><!-- 线体中文名 -->
+			<Data name="DATA7" type="string" /><!-- DATA7 -->
+			<Data name="DATA3" type="string" /><!-- DATA3 -->
+			<Data name="BANCI" type="string" /><!-- 班次 -->
+			<Data name="START_EFFECT_TIME" type="string" /><!-- 开始时间 -->
+			<Data name="END_EFFECT_TIME" type="string" /><!-- 结束时间 -->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.zzcj.action.ExportAlarmLogAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="ZZCJ_SAVE_ALARM_LOG_ACTION">
+		<Description>保存具体原因【故障事件】</Description>
+		<ActionContext>
+			<Data name="ID" type="string" /><!-- ID -->
+			<Data name="EventData50" type="string" /><!-- 具体原因 -->
+			<Data name="EventData51" type="string" /><!-- 责任部门 -->
+			<!--Data name="ALARM_LOG" type="array" output="true"/-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.zzcj.action.SaveAlarmLogAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="ZZCJ_QUERY_PP_ALARM_LOG_ACTION">
+		<Description>查询【故障事件】</Description>
+		<ActionContext>
+			<Data name="limit" type="string" />
+			<Data name="start" type="string" />
+			<Data name="START_EFFECT_TIME" type="string"/><!-- 开始日期 --> 
+			<Data name="END_EFFECT_TIME" type="string"/><!-- 结束时间 --> 
+			<Data name="PRODUCTIONLINENAME" type="string"/><!-- 工段名字--> 
+			<Data name="BANCI" type="string"/><!-- 班次 --> 
+			<Data name="DATA3" type="string"/><!-- 属性 -->
+			<Data name="ALARM_LOG" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.zzcj.action.QueryPpAlarmLogAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="ZZCJ_EXPORT_PP_ALARM_LOG_ACTION">
+		<Description>导出【停线与故障事件】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PRODUCTIONLINENAME" type="string" /><!-- 线体中文名 -->
+			<Data name="DATA7" type="string" /><!-- DATA7 -->
+			<Data name="DATA3" type="string" /><!-- DATA3 -->
+			<Data name="BANCI" type="string" /><!-- 班次 -->
+			<Data name="START_EFFECT_TIME" type="string" /><!-- 开始时间 -->
+			<Data name="END_EFFECT_TIME" type="string" /><!-- 结束时间 -->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.zzcj.action.ExportPpAlarmLogAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<Action id="ZZCJ_QUERY_FPS_ACTION">
+		<Description>查询【故障事件】</Description>
+		<ActionContext>
+			<Data name="limit" type="string" />
+			<Data name="start" type="string" />
+			<Data name="START_EFFECT_TIME" type="string"/><!-- 开始日期 --> 
+			<Data name="END_EFFECT_TIME" type="string"/><!-- 结束时间 --> 
+			<Data name="PRODUCTIONLINENAME" type="string"/><!-- 工段名字--> 
+			<Data name="SOURCE" type="string"/><!-- 源--> 
+			<Data name="ALARM_LOG" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.zzcj.action.QueryFPSAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="ZZCJ_EXPORT_FPS_ACTION">
+		<Description>导出【故障事件】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="START_EFFECT_TIME" type="string"/><!-- 开始日期 --> 
+			<Data name="END_EFFECT_TIME" type="string"/><!-- 结束时间 --> 
+			<Data name="PRODUCTIONLINENAME" type="string"/><!-- 工段名字--> 
+			<Data name="SOURCE" type="string"/><!-- 源--> 
+			<Data name="START_EFFECT_TIME" type="string" /><!-- 开始时间 -->
+			<Data name="END_EFFECT_TIME" type="string" /><!-- 结束时间 -->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.zzcj.action.ExportFPSAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+</Config>

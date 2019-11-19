@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+
+	<Action id="ZZCJ_QUERY_PMC_PP_START_RATE_ACTION">
+		<Description>查询【开动率月报表】</Description>
+		<ActionContext>
+			<Data name="YYYY_MM" type="string" /><!-- 日期 -->
+			<Data name="BANCI" type="string" />
+			<Data name="PMC_PP_START_RATE" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.zzcj.action.QueryPmcPpStartRateAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="ZZCJ_EXPORT_PMC_PP_START_RATE_ACTION">
+		<Description>导出【开动率月报表】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="YYYY_MM" type="string" /><!-- 日期 -->
+			<Data name="BANCI" type="string" /><!-- 班次 -->
+			<Data name="PMC_PP_START_RATE" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.zzcj.action.ExportPmcPpStartRateAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+</Config>

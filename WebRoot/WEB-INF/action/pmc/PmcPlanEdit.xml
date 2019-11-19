@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+    	
+	<Action id="QUERY_PLAN_PRODUCT_INFO">
+		<Description>查询【计划产量录入报表】</Description>
+		<ActionContext>
+			<Data name="ID" type="string" /><!--ID -->
+			<Data name="PlanDate" type="string" /><!--日期 -->
+			<Data name="LineName" type="string" />  <!-- 线体名称（英文） -->
+			<Data name="ShiftText" type="string" />  <!-- 班次 -->
+			<Data name="PmcPlanEdit" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryPlanProductEditAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+	<Action id="UPDATE_PLAN_PRODUCT_ACTION">
+		<Description>修改【PRODUCT系统参数】</Description>
+		<ActionContext>
+			<Data name="PlanProduct" type="string" /><!--参数代码-->
+			<Data name="ID" type="string" /><!--参数代码-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.UpdatePlanProductAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<!-- 查询工作日历 -->
+	<Action id="QUERY_PMC_CALENDAR">
+		<Description>查询工作日历</Description>
+		<ActionContext>
+			<Data name="START_TIME" type="string" /> <!-- 开始时间 -->
+			<Data name="PRODUCTIONLINENAME" type="string" />
+			<Data name="CALENDER_DATE" type="array" output="true"/>
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryPmcCalendarAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+
+	<Action id="QUERY_WORK_DATE_BIND_MODEL">
+		<Description>分页查询【日历绑定模板信息】</Description>
+		<ActionContext>
+			<Data name="limit" type="string" />
+			<Data name="start" type="string" />
+			<Data name="Model_Code" type="string" />
+			<Data name="STAR_TTIME" type="string" />
+			<Data name="WORK_DATE_MODEL" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryBindWorkAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+	<Action id="UPDATE_DATE_BIND">
+		<Description>保存、删除【日历模板信息绑定】</Description>
+		<ActionContext>
+			<Data name="ID" type="string" />
+			<Data name="DATE_TEMPLET_ID" type="string" />
+
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.SaveBindDateData" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+	<!--查询可用的模板-->
+	<Action id="QUERY_ALL_DATE_TEMPLET">
+		<Description>分页查询【工作日历模板】</Description>
+		<ActionContext>
+			<Data name="limit" type="string" />
+			<Data name="start" type="string" />
+			<Data name="ALL_TEMPLET_DATE" type="array" output="true"/>
+			<Data name="MODEL_NAME" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryAllDateTempletAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+
+	<Action id="ADD_WORK_DATE_ACTION">
+		<Description>添加【工作日历】</Description>
+		<ActionContext>
+			<Data name="Work_Date" type="string" />
+			<Data name="Model_Code" type="string" />
+			<Data name="Shift" type="string" />
+			<Data name="Is_WorkDate" type="string" />
+			<Data name="LastUpTime" type="string" />
+			<Data name="Line_Name" type="string" />
+			<Data name="Line_Code" type="string" />
+			<Data name="Work_Shop" type="string" />
+			<Data name="CALENDER_DATE" type="object" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.AddWorkDateInfo" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+	<Action id="DELETE_WORK_DATE_ACTION">
+		<Description>删除【工作日历】</Description>
+		<ActionContext>
+			<Data name="ID" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.DeleteWorkDateAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+	<Action id="UPDATE_WORK_DATE_ACTION">
+		<Description>更新【工作日历】</Description>
+		<ActionContext>
+			<Data name="ID" type="string" />
+			<Data name="Work_Date" type="string" />
+			<Data name="Model_Code" type="string" />
+			<Data name="Shift" type="string" />
+			<Data name="Is_WorkDate" type="string" />
+			<Data name="LastUpTime" type="string" />
+			<Data name="Line_Name" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.UpdateWorkDateAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+	<Action id="ADD_NEW_WORKDATE">
+		<Description>新增【工作日历信息】</Description>
+		<ActionContext>
+			<Data name="START_TIME" type="string" /><!--日期 -->
+			<Data name="CALENDER_DATE" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.AddPmcWorkDateAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+	<Action id="QUERY_PMC_LINE_DATE">
+		<Description>查询【线体名称】</Description>
+		<ActionContext>
+			<Data name="PMC_PP_LINE" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryAllLineDate" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<Action id="QUERY_MODEL_NAME">
+		<Description>查询【模板名称】</Description>
+		<ActionContext>
+			<Data name="MODEL_NAME" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryModelName" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<Action id="QUERY_PMC_LINEEN_DATE">
+		<Description>查询【线体名称EN】</Description>
+		<ActionContext>
+			<Data name="PMC_PP_LINE_EN" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryAllLineDateEn" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+</Config>

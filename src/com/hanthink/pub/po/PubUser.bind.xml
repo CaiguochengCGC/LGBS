@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<mapping>
+    <class name="com.hanthink.pub.po.PubUserPO" table="PUB_USER">
+        <property name="pkUserName" type="java.lang.String">
+            <column name="PK_USER_NAME"/>
+        </property>
+        <property name="userCname" type="java.lang.String">
+            <column name="USER_CNAME"/>
+        </property>
+        <property name="userPwd" type="java.lang.String">
+            <column name="USER_PWD"/>
+        </property>
+        <property name="userStatus" type="java.lang.Integer">
+            <column name="USER_STATUS"/>
+        </property>
+        <property name="isUpdatePwd" type="java.lang.Integer">
+            <column name="IS_UPDATE_PWD"/>
+        </property>
+        <property name="devision" type="java.lang.String">
+            <column name="DEVISION"/>
+        </property>
+        <property name="lastUpdateUsername" type="java.lang.String">
+            <column name="LAST_UPDATE_USERNAME"/>
+        </property>
+        <property name="lastUpdateIp" type="java.lang.String">
+            <column name="LAST_UPDATE_IP"/>
+        </property>
+        <property name="lastUpdateTime" type="java.util.Date">
+            <column name="LAST_UPDATE_TIME"/>
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="CREATE_TIME"/>
+        </property>
+    </class>
+</mapping>

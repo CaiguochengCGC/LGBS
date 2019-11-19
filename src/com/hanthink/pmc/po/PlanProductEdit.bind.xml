@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<mapping>
+	<class name="com.hanthink.pmc.po.PlanProductEditPO" table="PMC_PP_PRODUCT">
+		<property name="id" type="java.lang.String">
+			<column name="ID"/>
+		</property>
+		<property name="ppdate" type="java.lang.String">
+			<column name="PPDATE"/>
+		</property>
+		<property name="linecode" type="java.lang.String">
+			<column name="LineCode"/>
+		</property>
+		<property name="linename" type="java.lang.String">
+			<column name="LineName"/>
+		</property>
+		<property name="planproduct" type="java.lang.Integer">
+			<column name="PlanProduct"/>
+		</property>
+		<property name="actproduct" type="java.lang.Integer">
+			<column name="ActProduct"/>
+		</property>
+		<property name="shift" type="java.lang.Integer">
+			<column name="Shift"/>
+		</property>
+		<property name="cartype" type="java.lang.String">
+			<column name="CarType"/>
+		</property>
+	</class>
+</mapping>

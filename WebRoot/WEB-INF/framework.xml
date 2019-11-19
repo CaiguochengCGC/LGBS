@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="GB2312"?>
+<Config xmlns="http://dms/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://dms/config DefFramework.xsd">
+
+    <!-- session的配置 -->
+    <Channel id="chn_delphi_xml" classname="">
+        <SessionContext>
+            <Data name="SESSION_USER_NO" type="string" />
+        </SessionContext>
+    </Channel>
+
+    <!-- 持久层 -->
+    <Service id="PersistenceService" classname="cn.boho.framework.service.PersistenceService">
+        <Param name="StartService" value="true" />
+        <Param name="ConfFile" value="/WEB-INF/dsconfig.xml" />
+        <Param name="dbtype" value="CQUERY_TYPE_MSSQL_2005" />
+    </Service>
+
+    <!-- 系统消息的配置(properties) -->
+    <Service id="MessageService" classname="cn.boho.framework.service.MessageService">
+        <Param name="StartService" value="true" />
+        <Param name="framework" value="/WEB-INF/framework.properties" />
+        <Param name="cuspcms" value="/WEB-INF/common.properties" />
+    </Service>
+
+    <!-- 缓存的配置 -->
+    <Service id="EHCacheService" classname="cn.boho.framework.service.EHCacheService">
+        <Param name="StartService" value="false" />
+        <Param name="ehcache" value="/WEB-INF/ehcache.xml" />
+    </Service>
+
+    <!-- 文件服务器 	-->
+    <Service id="FileServerService" classname="cn.boho.framework.service.FileServerService">
+        <Param name="StartService" value="true" />
+        <Param name="absolutepath" value="c:" />
+        <Param name="config" value="file" />
+        <!-- <Param name="type" value="ftp" />  -->
+        <Param name="type" value="1" />
+        <Param name="tempfile" value="/upload/temp" />
+        <Param name="finalfile" value="/upload/final" />
+        <Param name="maxuploadsize" value="100mb" />
+        <Param name="faileimage" value="/upload/faileimage.gif" />
+        <Param name="permitfile" value="gif;jpg;jpeg;png;bmp;xls;doc;swf;rar;mdb;docx;xlsx" />
+        <Param name="fileidtype" value="2" />
+        <Param name="tablename" value="TG_FILE" />
+    </Service>
+
+    <!-- 任务的控制,注意需要在数据库中有相应的表 -->
+    <Service id="JobTaskService" classname="cn.boho.framework.service.JobTaskService">
+        <Param name="StartService" value="false" />
+    </Service>
+
+    <!-- 验证服务的控制 -->
+    <Service id="ValidatorService" classname="cn.boho.framework.service.ValidatorService">
+        <Param name="StartService" value="true" />
+        <Param name="ConfFile" value="/WEB-INF/validator-rules.xml" />
+    </Service>
+
+    <!-- action配置文件 -->
+
+    <!-- PUB -->
+    <ActionRef id="PubUser" fileName="/WEB-INF/action/pub/PubUser.xml" />
+    <ActionRef id="PubDataDict" fileName="/WEB-INF/action/pub/PubDataDict.xml" />
+    <ActionRef id="PubModule" fileName="/WEB-INF/action/pub/PubModule.xml" />
+    <ActionRef id="PubPrivileges" fileName="/WEB-INF/action/pub/PubPrivileges.xml" />
+    <ActionRef id="SysParam" fileName="/WEB-INF/action/pub/SysParam.xml" />
+    <ActionRef id="PubRole" fileName="/WEB-INF/action/pub/PubRole.xml" />
+    <ActionRef id="PubRolePrivileges" fileName="/WEB-INF/action/pub/PubRolePrivileges.xml" />
+    <ActionRef id="PubUserRole" fileName="/WEB-INF/action/pub/PubUserRole.xml" />
+
+    <!-- PMC -->
+    <ActionRef id="TabStopLineTemp" fileName="/WEB-INF/action/pmc/TabStopLine.xml" />
+    <ActionRef id="PmcDateImport" fileName="/WEB-INF/action/pmc/PmcDateImport.xml" />
+
+    <ActionRef id="Tabproducttype" fileName="/WEB-INF/action/pmc/Tabproducttype.xml" />
+    <ActionRef id="PmcStationCt" fileName="/WEB-INF/action/pmc/PmcStationCt.xml" />
+    <ActionRef id="alarmLog" fileName="/WEB-INF/action/pmc/alarmLog.xml" />
+    <ActionRef id="PmcEquipmentStopLine" fileName="/WEB-INF/action/pmc/PmcEquipmentStopLine.xml" />
+    <ActionRef id="PmcEquipmentStop" fileName="/WEB-INF/action/pmc/PmcEquipmentStop.xml" />
+    <ActionRef id="PmcDatePp" fileName="/WEB-INF/action/pmc/PmcDatePp.xml" />
+    <ActionRef id="PmcDatePpneck" fileName="/WEB-INF/action/pmc/PmcDatePpneck.xml" />
+    <ActionRef id="TabCycleTime" fileName="/WEB-INF/action/pmc/TabCycleTime.xml" />
+    <ActionRef id="PmcPpStation" fileName="/WEB-INF/action/pmc/PmcPpStation.xml" />
+    <ActionRef id="PmcPpStation" fileName="/WEB-INF/action/pmc/PmcViewRecord.xml" />
+    <ActionRef id="PmcPpStation" fileName="/WEB-INF/action/pmc/TabProductHour.xml" />
+    <ActionRef id="PmcPpStartRate" fileName="/WEB-INF/action/pmc/PmcPpStartRate.xml" />
+    <ActionRef id="PmcPpStartRateY" fileName="/WEB-INF/action/pmc/PmcPpStartRateY.xml" />
+    <ActionRef id="PmcPpKpiday" fileName="/WEB-INF/action/pmc/PmcPpKpiday.xml" />
+    <ActionRef id="PmcPpKpimonth" fileName="/WEB-INF/action/pmc/PmcPpKpimonth.xml" />
+    <ActionRef id="PmcPpKpiyear" fileName="/WEB-INF/action/pmc/PmcPpKpiyear.xml" />
+    <ActionRef id="PmcPpYy" fileName="/WEB-INF/action/pmc/PmcPpYy.xml" />
+    <ActionRef id="PmcPpMm" fileName="/WEB-INF/action/pmc/PmcPpMm.xml" />
+    <ActionRef id="PmcPpWeek" fileName="/WEB-INF/action/pmc/PmcPpWeek.xml" />
+    <ActionRef id="PmcSystemReport" fileName="/WEB-INF/action/pmc/PmcSystemReport.xml" />
+    <ActionRef id="PmcPlanEdit" fileName="/WEB-INF/action/pmc/PmcPlanEdit.xml" />
+
+    <!-- CYCJ -->
+    <ActionRef id="CycjTabStopLineTemp" fileName="/WEB-INF/action/cycj/TabStopLine.xml" />
+    <ActionRef id="CycjDateImport" fileName="/WEB-INF/action/cycj/CycjDateImport.xml" />
+    <ActionRef id="CycjTabproducttype" fileName="/WEB-INF/action/cycj/Tabproducttype.xml" />
+    <ActionRef id="CycjStationCt" fileName="/WEB-INF/action/cycj/CycjStationCt.xml" />
+    <ActionRef id="CycjalarmLog" fileName="/WEB-INF/action/cycj/alarmLog.xml" />
+    <ActionRef id="CycjEquipmentStopLine" fileName="/WEB-INF/action/cycj/CycjEquipmentStopLine.xml" />
+    <ActionRef id="CycjEquipmentStop" fileName="/WEB-INF/action/cycj/CycjEquipmentStop.xml" />
+    <ActionRef id="CycjDatePp" fileName="/WEB-INF/action/cycj/CycjDatePp.xml" />
+    <ActionRef id="CycjDatePpneck" fileName="/WEB-INF/action/cycj/CycjDatePpneck.xml" />
+    <ActionRef id="CycjTabCycleTime" fileName="/WEB-INF/action/cycj/TabCycleTime.xml" />
+    <ActionRef id="CycjPpStation" fileName="/WEB-INF/action/cycj/CycjPpStation.xml" />
+    <ActionRef id="CycjPpStation" fileName="/WEB-INF/action/cycj/CycjViewRecord.xml" />
+    <ActionRef id="CycjPpStation" fileName="/WEB-INF/action/cycj/TabProductHour.xml" />
+    <ActionRef id="CycjPpStartRate" fileName="/WEB-INF/action/cycj/CycjPpStartRate.xml" />
+    <ActionRef id="CycjPpStartRateY" fileName="/WEB-INF/action/cycj/CycjPpStartRateY.xml" />
+    <ActionRef id="CycjPpKpiday" fileName="/WEB-INF/action/cycj/CycjPpKpiday.xml" />
+    <ActionRef id="CycjPpKpimonth" fileName="/WEB-INF/action/cycj/CycjPpKpimonth.xml" />
+    <ActionRef id="CycjPpKpiyear" fileName="/WEB-INF/action/cycj/CycjPpKpiyear.xml" />
+    <ActionRef id="CycjPpYy" fileName="/WEB-INF/action/cycj/CycjPpYy.xml" />
+    <ActionRef id="CycjPpMm" fileName="/WEB-INF/action/cycj/CycjPpMm.xml" />
+    <ActionRef id="CycjPpWeek" fileName="/WEB-INF/action/cycj/CycjPpWeek.xml" />
+    <ActionRef id="CycjSystemReport" fileName="/WEB-INF/action/cycj/CycjSystemReport.xml" />
+
+    <!-- YQCJ -->
+    <ActionRef id="YqcjTabStopLineTemp" fileName="/WEB-INF/action/yqcj/TabStopLine.xml" />
+    <ActionRef id="YqcjDateImport" fileName="/WEB-INF/action/yqcj/YqcjDateImport.xml" />
+    <ActionRef id="YqcjTabproducttype" fileName="/WEB-INF/action/yqcj/Tabproducttype.xml" />
+    <ActionRef id="YqcjStationCt" fileName="/WEB-INF/action/yqcj/YqcjStationCt.xml" />
+    <ActionRef id="YqcjalarmLog" fileName="/WEB-INF/action/yqcj/alarmLog.xml" />
+    <ActionRef id="YqcjEquipmentStopLine" fileName="/WEB-INF/action/yqcj/YqcjEquipmentStopLine.xml" />
+    <ActionRef id="YqcjEquipmentStop" fileName="/WEB-INF/action/yqcj/YqcjEquipmentStop.xml" />
+    <ActionRef id="YqcjDatePp" fileName="/WEB-INF/action/yqcj/YqcjDatePp.xml" />
+    <ActionRef id="YqcjDatePpneck" fileName="/WEB-INF/action/yqcj/YqcjDatePpneck.xml" />
+    <ActionRef id="YqcjTabCycleTime" fileName="/WEB-INF/action/yqcj/TabCycleTime.xml" />
+    <ActionRef id="YqcjPpStation" fileName="/WEB-INF/action/yqcj/YqcjPpStation.xml" />
+    <ActionRef id="YqcjPpStation" fileName="/WEB-INF/action/yqcj/YqcjViewRecord.xml" />
+    <ActionRef id="YqcjPpStation" fileName="/WEB-INF/action/yqcj/TabProductHour.xml" />
+    <ActionRef id="YqcjPpStartRate" fileName="/WEB-INF/action/yqcj/YqcjPpStartRate.xml" />
+    <ActionRef id="YqcjPpStartRateY" fileName="/WEB-INF/action/yqcj/YqcjPpStartRateY.xml" />
+    <ActionRef id="YqcjPpKpiday" fileName="/WEB-INF/action/yqcj/YqcjPpKpiday.xml" />
+    <ActionRef id="YqcjPpKpimonth" fileName="/WEB-INF/action/yqcj/YqcjPpKpimonth.xml" />
+    <ActionRef id="YqcjPpKpiyear" fileName="/WEB-INF/action/yqcj/YqcjPpKpiyear.xml" />
+    <ActionRef id="YqcjPpYy" fileName="/WEB-INF/action/yqcj/YqcjPpYy.xml" />
+    <ActionRef id="YqcjPpMm" fileName="/WEB-INF/action/yqcj/YqcjPpMm.xml" />
+    <ActionRef id="YqcjPpWeek" fileName="/WEB-INF/action/yqcj/YqcjPpWeek.xml" />
+    <ActionRef id="YqcjSystemReport" fileName="/WEB-INF/action/yqcj/YqcjSystemReport.xml" />
+
+    <!-- ZZCJ -->
+    <ActionRef id="ZzcjTabStopLineTemp" fileName="/WEB-INF/action/Zzcj/TabStopLine.xml" />
+    <ActionRef id="ZzcjDateImport" fileName="/WEB-INF/action/Zzcj/ZzcjDateImport.xml" />
+    <ActionRef id="ZzcjTabproducttype" fileName="/WEB-INF/action/Zzcj/Tabproducttype.xml" />
+    <ActionRef id="ZzcjStationCt" fileName="/WEB-INF/action/Zzcj/ZzcjStationCt.xml" />
+    <ActionRef id="ZzcjalarmLog" fileName="/WEB-INF/action/Zzcj/alarmLog.xml" />
+    <ActionRef id="ZzcjEquipmentStopLine" fileName="/WEB-INF/action/Zzcj/ZzcjEquipmentStopLine.xml" />
+    <ActionRef id="ZzcjEquipmentStop" fileName="/WEB-INF/action/Zzcj/ZzcjEquipmentStop.xml" />
+    <ActionRef id="ZzcjDatePp" fileName="/WEB-INF/action/Zzcj/ZzcjDatePp.xml" />
+    <ActionRef id="ZzcjDatePpneck" fileName="/WEB-INF/action/Zzcj/ZzcjDatePpneck.xml" />
+    <ActionRef id="ZzcjTabCycleTime" fileName="/WEB-INF/action/Zzcj/TabCycleTime.xml" />
+    <ActionRef id="ZzcjPpStation" fileName="/WEB-INF/action/Zzcj/ZzcjPpStation.xml" />
+    <ActionRef id="ZzcjPpStation" fileName="/WEB-INF/action/Zzcj/ZzcjViewRecord.xml" />
+    <ActionRef id="ZzcjPpStation" fileName="/WEB-INF/action/Zzcj/TabProductHour.xml" />
+    <ActionRef id="ZzcjPpStartRate" fileName="/WEB-INF/action/Zzcj/ZzcjPpStartRate.xml" />
+    <ActionRef id="ZzcjPpStartRateY" fileName="/WEB-INF/action/Zzcj/ZzcjPpStartRateY.xml" />
+    <ActionRef id="ZzcjPpKpiday" fileName="/WEB-INF/action/Zzcj/ZzcjPpKpiday.xml" />
+    <ActionRef id="ZzcjPpKpimonth" fileName="/WEB-INF/action/Zzcj/ZzcjPpKpimonth.xml" />
+    <ActionRef id="ZzcjPpKpiyear" fileName="/WEB-INF/action/Zzcj/ZzcjPpKpiyear.xml" />
+    <ActionRef id="ZzcjPpYy" fileName="/WEB-INF/action/Zzcj/ZzcjPpYy.xml" />
+    <ActionRef id="ZzcjPpMm" fileName="/WEB-INF/action/Zzcj/ZzcjPpMm.xml" />
+    <ActionRef id="ZzcjPpWeek" fileName="/WEB-INF/action/Zzcj/ZzcjPpWeek.xml" />
+    <ActionRef id="ZzcjSystemReport" fileName="/WEB-INF/action/Zzcj/ZzcjSystemReport.xml" />
+
+    <!-- 控制是否有权限访问 -->
+    <AccessControlPolicy classname="false" type="mobile" />
+    <AccessControlPolicy classname="false" type="xml" />
+    <AccessControlPolicy classname="false" type="http" />
+    <AccessControlPolicy classname="com.hanthink.pub.acl.JSonACLPolicy" type="json" />
+    <!-- <AccessControlPolicy classname="false" type="json" /> -->
+    <AccessControlPolicy classname="false" type="wap" />
+</Config>

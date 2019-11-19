@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<mapping>
+	<class name="com.hanthink.pub.po.PubRolePO" table="PUB_Role">
+		<property name="pkRoleId" type="java.lang.String">
+			<column name="PK_ROLE_ID"/>
+		</property>
+		<property name="roleName" type="java.lang.String">
+			<column name="ROLE_NAME"/>
+		</property>
+		<property name="roleDescription" type="java.lang.String">
+			<column name="ROLE_DESCRIPTION"/>
+		</property>
+		<property name="lastUpdateUsername" type="java.lang.String">
+			<column name="LAST_UPDATE_USERNAME"/>
+		</property>
+		<property name="lastUpdateIp" type="java.lang.String">
+			<column name="LAST_UPDATE_IP"/>
+		</property>
+		<property name="lastUpdateTime" type="java.util.Date">
+			<column name="LAST_UPDATE_TIME"/>
+		</property>
+		<property name="createTime" type="java.util.Date">
+			<column name="CREATE_TIME"/>
+		</property>
+	</class>
+</mapping>

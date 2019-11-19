@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+    
+    <Action id="CYCJ_QUERY_TAB_STOP_LINE_ACTION">
+        <Description>查询【停线查询表】</Description>
+        <ActionContext>
+        	<Data name="limit" type="string" />
+			<Data name="start" type="string" />
+			<Data name="EventDate1" type="string" /><!-- 工位 -->
+			<Data name="BANCI" type="string" /><!-- 班次 -->
+			<Data name="SHUXING" type="string" />
+			<Data name="EventDate40" type="string" /><!-- 工段名字 -->
+			<Data name="START_PLAN_DATE" type="string" /><!-- 开始日期 -->
+			<Data name="END_PLAN_DATE" type="string" /><!-- 结束日期 -->
+			<Data name="TAB_STOP_LINE" type="array" output="true"/>
+		</ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.cycj.action.QueryTabStopLineAction" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    <Action id="CYCJ_QUERY_TAB_STOP_LINE_ACTION_CUT">
+        <Description>查询【停线查询表】</Description>
+        <ActionContext>
+        	<Data name="limit" type="string" />
+			<Data name="start" type="string" />
+			<Data name="EventDate1" type="string" /><!-- 工位 -->
+			<Data name="BANCI" type="string" /><!-- 班次 -->
+			<Data name="SHUXING" type="string" />
+			<Data name="EventDate40" type="string" /><!-- 工段名字 -->
+			<Data name="START_PLAN_DATE" type="string" /><!-- 开始日期 -->
+			<Data name="END_PLAN_DATE" type="string" /><!-- 结束日期 -->
+			<Data name="TAB_STOP_LINE" type="array" output="true"/>
+		</ActionContext>
+        <ActionParam>
+            <ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+            <ActionStep id="2" classname="com.hanthink.cycj.action.QueryTabStopLineActionCut" on1Do="next" onOtherDo="3"/>
+            <ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+        </ActionParam>
+    </Action>
+    <Action id="CYCJ_EXPORT_TAB_STOP_LINE_ACTION_CUT">
+		<Description>导出【停线查询表】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+		    <Data name="START_PLAN_DATE" type="string" /><!-- 开始日期 -->
+			<Data name="END_PLAN_DATE" type="string" /><!-- 结束日期 -->
+			<Data name="EventDate40" type="string" /><!-- EventDate40-->
+			<Data name="EventDate1" type="string" /><!-- EventDate1 -->
+			<Data name="BANCI" type="string" /><!-- 班次 -->
+			<Data name="TAB_STOP_LINE" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.cycj.action.ExportTabStopLineActionCut" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+    
+    <Action id="CYCJ_EXPORT_TAB_STOP_LINE_ACTION">
+		<Description>导出【停线查询表】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+		    <Data name="START_PLAN_DATE" type="string" /><!-- 开始日期 -->
+			<Data name="END_PLAN_DATE" type="string" /><!-- 结束日期 -->
+			<Data name="EventDate40" type="string" /><!-- EventDate40-->
+			<Data name="EventDate1" type="string" /><!-- EventDate1 -->
+			<Data name="BANCI" type="string" /><!-- 班次 -->
+			<Data name="TAB_STOP_LINE" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.cycj.action.ExportTabStopLineAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="CYCJ_QUERY_TAB_STOP_LINE_RESPON_ACTION">
+		<Description>查询责任部门【停线查询表】</Description>
+		<ActionContext>
+			<Data name="PPDATE" type="string" /><!-- 日期 -->
+			<Data name="BANCI" type="string" />
+			<Data name="TAB_STOP_LINE" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.cycj.action.QueryTabStopLineResopnAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="CYCJ_EXPORT_TAB_STOP_LINE_RESPON_ACTION">
+		<Description>导出责任部门【停线查询表】</Description>
+		<ActionContext>
+			<Data name="PPDATE" type="string" /><!-- 日期 -->
+			<Data name="BANCI" type="string" /><!-- 班次 -->
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="TAB_STOP_LINE" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.cycj.action.ExportTabStopLineResponAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+</Config>

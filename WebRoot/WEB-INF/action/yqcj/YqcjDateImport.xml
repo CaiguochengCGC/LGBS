@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+    	
+	<Action id="YQCJ_QUERY_PMC_DATE_IMPORT_ACTION">
+		<Description>查询【计划日期数量导入】</Description>
+		<ActionContext>
+			<Data name="WORKDATE" type="string" />
+			<Data name="PMC_DATE_IMPORT" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.QueryPmcDateImportAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_GET_WORKTIME_ACTION">
+		<Description>查询工作时间设定</Description>
+		<ActionContext>
+			<Data name="para1" type="string" />
+			<Data name="para2" type="string" />
+			<Data name="YQCJ_WORKTIME" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.QueryWorkTimeAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_QUERY_PMC_DATE_IMPORTANDPP_ACTION">
+		<Description>查询【计划日期数量导入】</Description>
+		<ActionContext>
+			<Data name="WORKDATE" type="string" />
+			<Data name="PMC_DATE_IMPORT" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.QueryPmcDateImportAndPpAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_QUERY_PMC_DATE_IMPORT_IMPORT_ACTION">
+		<Description>查询【计划日期数量导入】</Description>
+		<ActionContext>
+			<Data name="START_PLAN_DATE" type="string" /><!-- 生产开始日期 -->
+			<Data name="END_PLAN_DATE" type="string" /><!-- 生产结束日期 -->
+			<Data name="SHIFT" type="string" /><!-- 工段 -->
+			<Data name="PMC_DATE_IMPORT" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.QueryPmcDateImportImportAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_ADD_PMC_DATE_IMPORT_ACTION">
+		<Description>添加【计划日期数量导入】</Description>
+		<ActionContext>
+			<Data name="FACTORY" type="string" /><!--工厂-->
+			<Data name="WORKSHOP" type="string" /><!--车间-->
+			<Data name="SHIFT" type="string" /><!--SHIFT-->
+			<Data name="WORKDATE" type="string" /><!--生产日期-->
+			<Data name="STARTTIME" type="string" /><!--工作开始时间-->
+			<Data name="ENDTIME" type="string" /><!--工作结束时间-->
+			<Data name="RESTTIME" type="string" /><!--休息时间-->
+			<Data name="IP21" type="string" /><!--IP21计划产量-->
+			<Data name="IP22" type="string" /><!--IP22计划产量-->
+			<Data name="IP23" type="string" /><!--IP23计划产量-->
+			<Data name="ZP11" type="string" /><!--ZP11计划产量-->
+			<Data name="BP31" type="string" /><!--BP31计划产量-->
+			<Data name="IP24" type="string" /><!--IP24计划产量-->
+			<Data name="BP32" type="string" /><!--BP32计划产量-->
+			<Data name="AS21" type="string" /><!--AS21计划产量-->
+			<Data name="OTHER" type="string" /><!--OTHER计划产量-->
+			<Data name="productTotal" type="string" /><!--总产量-->
+			<Data name="REMARK" type="string" /><!--备注-->
+			<Data name="OPERUSER" type="string" /><!--操作用户-->
+			<Data name="UPDATETIME" type="string" /><!--最后修改时间-->
+			<Data name="PMC_DATE_IMPORT" type="object" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.AddPmcDateImportAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	
+	<Action id="YQCJ_ADD_STOPLINE_ACTION">
+		<Description>添加油漆车间停线数据</Description>
+		<ActionContext>
+			<Data name="EventData54" type="string" /><!--最后操作时间-->
+			<Data name="EventDate1" type="string" /><!--发生时间-->
+			<Data name="EventDate2" type="string" /><!--恢复时间-->
+			<Data name="StopReson" type="string" /><!--停线原因-->
+			<Data name="BANCI" type="string" /><!--班别-->
+			<Data name="EventData46" type="string" /><!--工段-->
+			<Data name="EventData50" type="string" /><!--备注-->
+			<Data name="EventData51" type="string" /><!--责任部门-->
+			<Data name="EventData53" type="string" /><!--最后操作人-->
+			<Data name="TAB_STOP_LINE" type="object" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.AddStopLineAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_UPDATE_STOPLINE_ACTION">
+		<Description>修改油漆车间停线数据</Description>
+		<ActionContext>
+			<Data name="ID" type="string" /><!--ID-->
+			<Data name="EventData54" type="string" /><!--最后操作时间-->
+			<Data name="EventDate1" type="string" /><!--发生时间-->
+			<Data name="EventDate2" type="string" /><!--恢复时间-->
+			<Data name="StopReson" type="string" /><!--停线原因-->
+			<Data name="BANCI" type="string" /><!--班别-->
+			<Data name="EventData46" type="string" /><!--工段-->
+			<Data name="EventData50" type="string" /><!--备注-->
+			<Data name="EventData51" type="string" /><!--责任部门-->
+			<Data name="EventData53" type="string" /><!--最后操作人-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.UpdateStopLineAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_UPDATE_WORKTIME_ACTION">
+		<Description>修改油漆车间工作时间</Description>
+		<ActionContext>
+			<Data name="BAN1S" type="string" /><!--班次1开始时间-->
+			<Data name="BAN1E" type="string" /><!--班次1结束时间-->
+			<Data name="BAN2S" type="string" /><!--班次2开始时间-->
+			<Data name="BAN2E" type="string" /><!--班次2结束时间-->
+			<Data name="BAN3S" type="string" /><!--班次3开始时间-->
+			<Data name="BAN3E" type="string" /><!--班次3结束时间-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.UpdateWorkTimeAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	
+	
+	<Action id="YQCJ_DELETE_STOPLINE_ACTION">
+		<Description>删除油漆停线数据</Description>
+		<ActionContext>
+			<Data name="ID" type="array" /><!--ID-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.DeleteStopLineAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	
+	<Action id="YQCJ_UPDATE_PMC_DATE_IMPORT_ACTION">
+		<Description>修改【计划日期数量导入】</Description>
+		<ActionContext>
+			<Data name="ID" type="string" /><!--ID-->
+			<Data name="FACTORY" type="string" /><!--工厂-->
+			<Data name="WORKSHOP" type="string" /><!--车间-->
+			<Data name="SHIFT" type="string" /><!--SHIFT-->
+			<Data name="WORKDATE" type="string" /><!--生产日期-->
+			<Data name="STARTTIME" type="string" /><!--工作开始时间-->
+			<Data name="ENDTIME" type="string" /><!--工作结束时间-->
+			<Data name="RESTTIME" type="string" /><!--休息时间-->
+			<Data name="IP21" type="string" /><!--IP21计划产量-->
+			<Data name="IP22" type="string" /><!--IP22计划产量-->
+			<Data name="IP23" type="string" /><!--IP23计划产量-->
+			<Data name="ZP11" type="string" /><!--ZP11计划产量-->
+			<Data name="BP31" type="string" /><!--BP31计划产量-->
+			<Data name="IP24" type="string" /><!--IP24计划产量-->
+			<Data name="BP32" type="string" /><!--BP32计划产量-->
+			<Data name="AS21" type="string" /><!--AS21计划产量-->
+			<Data name="OTHER" type="string" /><!--OTHER计划产量-->
+			<Data name="productTotal" type="string" /><!--总产量-->
+			<Data name="REMARK" type="string" /><!--备注-->
+			<Data name="OPERUSER" type="string" /><!--操作用户-->
+			<Data name="UPDATETIME" type="string" /><!--最后修改时间-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.UpdatePmcDateImportAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_DELETE_PMC_DATE_IMPORT_ACTION">
+		<Description>删除【计划日期数量导入】</Description>
+		<ActionContext>
+			<Data name="ID" type="array" /><!--ID-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.DeletePmcDateImportAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_SAVE_PMC_DATE_IMPORT_ACTION">
+		<Description>批量处理【计划日期数量导入】</Description>
+		<ActionContext>
+			<Data name="PMC_DATE_IMPORT_FILE" type="file" /><!--file-->
+			<Data name="FACTORY" type="string" /><!--工厂-->
+			<Data name="WORKSHOP" type="string" /><!--车间-->
+            <Data name="PMC_DATE_IMPORT_INFO" type="string" output="true"/><!--info-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.SavePmcDateImportAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_EXPORT_PMC_DATE_IMPORT_ACTION">
+		<Description>查询【计划日期数量导入】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="START_PLAN_DATE" type="string" /><!-- 生产开始日期 -->
+			<Data name="END_PLAN_DATE" type="string" /><!-- 生产结束日期 -->
+			<Data name="SHIFT" type="string" /><!-- 工段 -->
+			<Data name="PMC_DATE_IMPORT" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.ExportPmcDateImportAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+</Config>
+	

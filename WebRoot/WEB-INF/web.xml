@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    version="2.4"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+    <filter>
+        <filter-name>login</filter-name>
+        <filter-class>com.hanthink.pub.acl.PermissionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>login</filter-name>
+        <url-pattern>/main.html</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>login</filter-name>
+        <url-pattern>/json</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>login</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
+    
+    <listener>
+        <listener-class>cn.boho.framework.acl.SessionList</listener-class>
+    </listener>
+    
+    <servlet>
+        <servlet-name>FrameworkInitializer</servlet-name>
+        <servlet-class>cn.boho.framework.core.FrameworkInitializer</servlet-class>
+        <init-param>
+            <param-name>configFile</param-name>
+            <param-value>/WEB-INF/framework.xml</param-value>
+        </init-param>
+        <init-param>
+            <param-name>log4j</param-name>
+            <param-value>/WEB-INF/log.xml</param-value>
+        </init-param>
+        <init-param>
+            <param-name>actioinXml</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>uploadcharset</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>JSonChannelServlet</servlet-name>
+        <servlet-class>cn.boho.framework.channel.json.JSonChannelServlet</servlet-class>
+        <init-param>
+            <param-name>DefaultEncoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>DefaultZip</param-name>
+            <param-value>none</param-value>
+        </init-param>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>WapChannelServlet</servlet-name>
+        <servlet-class>cn.boho.framework.channel.wap.WapChannelServlet</servlet-class>
+        <init-param>
+            <param-name>DefaultEncoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>DefaultZip</param-name>
+            <param-value>none</param-value>
+        </init-param>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>UploadFileServlet</servlet-name>
+        <servlet-class>cn.boho.framework.fileserver.UploadFileServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>BarcodeServlet</servlet-name>
+        <servlet-class>net.sourceforge.barbecue.BarcodeServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>BarcodeServlet</servlet-name>
+        <url-pattern>/barcode</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>UploadFileServlet</servlet-name>
+        <url-pattern>/servlet/UploadFileServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>JSonChannelServlet</servlet-name>
+        <url-pattern>/json</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>JSonChannelServlet</servlet-name>
+        <url-pattern>*.doc</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>WapChannelServlet</servlet-name>
+        <url-pattern>/wap</url-pattern>
+    </servlet-mapping>
+    
+    <session-config>
+        <session-timeout>180</session-timeout>
+    </session-config>
+    
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+    <login-config>
+        <auth-method>BASIC</auth-method>
+    </login-config>
+</web-app>

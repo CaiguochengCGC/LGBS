@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+
+	<Action id="YQCJ_QUERY_PMC_STATION_CT_ACTION">
+		<Description>查询【工位CT报表】</Description>
+		<ActionContext>
+			<Data name="PPDATE" type="string"/> 日期  
+			<Data name="PRODUCTIONLINENAME" type="string"/> 工段  
+			<Data name="QUERY_TYPE" type="string"/> 查询类型  
+			<Data name="PMC_STATION_CT" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.QueryPmcStationCtAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_EXPORT_PMC_STATION_CT_ACTION">
+		<Description>导出【瓶颈工位停机节拍日报表】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PPDATE" type="string" />
+			<Data name="QUERY_TYPE" type="string" />
+			<Data name="PRODUCTIONLINENAME" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.ExportPmcStationCtAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_EXPORT_PMC_STATION_CT_WEEK_ACTION">
+		<Description>导出【瓶颈工位停机节拍周报表】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PPDATE" type="string" />
+			<Data name="QUERY_TYPE" type="string" />
+			<Data name="PRODUCTIONLINENAME" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.ExportPmcStationCtWeekAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_EXPORT_PMC_STATION_CT_MONTH_ACTION">
+		<Description>导出【瓶颈工位停机节拍月报表】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PPDATE" type="string" />
+			<Data name="QUERY_TYPE" type="string" />
+			<Data name="PRODUCTIONLINENAME" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.ExportPmcStationCtMonthAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="YQCJ_EXPORT_PMC_STATION_CT_YEAR_ACTION">
+		<Description>导出【瓶颈工位停机节拍年报表】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PPDATE" type="string" />
+			<Data name="QUERY_TYPE" type="string" />
+			<Data name="PRODUCTIONLINENAME" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.yqcj.action.ExportPmcStationCtYearAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+		
+</Config>

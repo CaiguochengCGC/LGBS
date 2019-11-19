@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+
+	<Action id="ADD_PMC_VIEW_RECORD_ACTION">
+		<Description>添加【作息时间模板】</Description>
+		<ActionContext>
+			<Data name="Work_Shop" type="string" /><!--ID-->
+			<Data name="Templet_Name" type="string" /><!--工厂-->
+			<Data name="Shift" type="Integer" /><!--车间-->
+			<Data name="WorkStart_Time" type="string" /><!--录入日期-->
+			<Data name="WorkEnd_Time" type="string" /><!--用户名-->
+			<Data name="Rest_Time1" type="string" /><!--意见反馈-->
+			<Data name="Rest_Time2" type="string" /><!--操作用户-->
+			<Data name="Rest_Time3" type="string" /><!--ID-->
+			<Data name="Rest_Time4" type="string" /><!--工厂-->
+			<Data name="Rest_Time5" type="string" /><!--车间-->
+			<Data name="Rest_Time6" type="string" /><!--录入日期-->
+			<Data name="Rest_Time7" type="string" /><!--用户名-->
+			<Data name="Rest_Time8" type="string" /><!--意见反馈-->
+			<Data name="Rest_Time9" type="string" /><!--操作用户-->
+			<Data name="Rest_Time10" type="string" /><!--操作用户-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.AddPmcViewRecordAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="UPDATE_PMC_VIEW_RECORD_ACTION">
+		<Description>修改【作息时间模板】</Description>
+		<ActionContext>
+			<Data name="Work_Shop" type="string" />
+			<Data name="Templet_Name" type="string" />
+			<Data name="Shift" type="Integer" />
+			<Data name="WorkStart_Time" type="string" />
+			<Data name="WorkEnd_Time" type="string" />
+			<Data name="Rest_Time1" type="string" />
+			<Data name="Rest_Time2" type="string" />
+			<Data name="Rest_Time3" type="string" />
+			<Data name="Rest_Time4" type="string" />
+			<Data name="Rest_Time5" type="string" />
+			<Data name="Rest_Time6" type="string" />
+			<Data name="Rest_Time7" type="string" />
+			<Data name="Rest_Time8" type="string" />
+			<Data name="Rest_Time9" type="string" />
+			<Data name="Rest_Time10" type="string" />
+			<Data name="Model_Code" type="Integer" />
+
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.UpdatePmcViewRecordAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+	<Action id="UPDATE_CT_ACTION">
+		<Description>修改【CT】</Description>
+		<ActionContext>
+			<Data name="PRODUCTION" type="string" />
+			<Data name="CT" type="Integer" />
+			<Data name="EP21" type="Integer" />
+			<Data name="ZP11" type="Integer" />
+			<Data name="BP31" type="Integer" />
+			<Data name="BP32" type="Integer" />
+			<Data name="AS21" type="Integer" />
+			<Data name="AS22" type="Integer" />
+			<Data name="BP34" type="Integer" />
+			<Data name="AS24" type="Integer" />
+			<Data name="AS26" type="Integer" />
+			<Data name="AS28" type="Integer" />
+
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.UpdateCTAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+	<Action id="UPDATE_PC_ACTION">
+		<Description>修改【PC】</Description>
+		<ActionContext>
+			<Data name="ID" type="string" />
+			<Data name="ActProduct" type="Integer" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.UpdatePCAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<Action id="DELETE_PMC_VIEW_RECORD_ACTION">
+		<Description>删除【作息时间模板】</Description>
+		<ActionContext>
+			<Data name="Model_Code" type="Integer" /><!--ID-->
+			<Data name="PMC_VIEW_RECORD" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.DeletePmcViewRecordAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="QUERY_PMC_VIEW_RECORD_ACTION">
+		<Description>查询【作息模板】</Description>
+		<ActionContext>
+		    <Data name="START_PLAN_DATE" type="string" /><!-- 开始日期 -->
+			<Data name="END_PLAN_DATE" type="string" /><!-- 结束日期 -->
+			<Data name="PMC_VIEW_RECORD" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryPmcViewRecordAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<Action id="QUERY_PMC_CY_ACT_PC">
+		<Description>查询【PMC冲压车间实际产量】</Description>
+		<ActionContext>
+			<Data name="WORKDATE" type="string" />
+			<Data name="PMC_CY_PC" type="array" output="true"/>
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryPmcCYACPCAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<Action id="QUERY_CT_ACTION">
+		<Description>查询【CT】</Description>
+		<ActionContext>
+			<Data name="CT" type="array" output="true"/>
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryEditCTAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<Action id="EXPORT_PMC_VIEW_RECORD_ACTION">
+		<Description>查询【意见反馈表】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+		    <Data name="START_PLAN_DATE" type="string" /><!-- 开始日期 -->
+			<Data name="END_PLAN_DATE" type="string" /><!-- 结束日期 -->
+			<Data name="PMC_VIEW_RECORD" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.ExportPmcViewRecordAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+</Config>

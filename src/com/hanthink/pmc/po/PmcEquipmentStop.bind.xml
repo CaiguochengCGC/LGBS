@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<mapping>
+	<class name="com.hanthink.pmc.po.PmcEquipmentStopPO" table="PMC_EQUIPMENT_STOP">
+		<property name="id" type="java.lang.Integer">
+			<column name="ID"/>
+		</property>
+		<property name="ppdate" type="java.util.Date">
+			<column name="PPDATE"/>
+		</property>
+		<property name="factory" type="java.lang.String">
+			<column name="FACTORY"/>
+		</property>
+		<property name="workshop" type="java.lang.String">
+			<column name="WORKSHOP"/>
+		</property>
+		<property name="productionline" type="java.lang.String">
+			<column name="PRODUCTIONLINE"/>
+		</property>
+		<property name="productionlinename" type="java.lang.String">
+			<column name="PRODUCTIONLINENAME"/>
+		</property>
+		<property name="station" type="java.lang.String">
+			<column name="STATION"/>
+		</property>
+		<property name="stoptime" type="java.lang.Integer">
+			<column name="STOPTIME"/>
+		</property>
+		<property name="stopcount" type="java.lang.Integer">
+			<column name="STOPCOUNT"/>
+		</property>
+		<property name="data8" type="java.lang.Integer">
+			<column name="DATA8"/>
+		</property>
+		<property name="data9" type="java.lang.Integer">
+			<column name="DATA9"/>
+		</property>
+		<property name="data10" type="java.lang.Integer">
+			<column name="DATA10"/>
+		</property>
+		<property name="data11" type="java.lang.Integer">
+			<column name="DATA11"/>
+		</property>
+		<property name="data12" type="java.lang.Integer">
+			<column name="DATA12"/>
+		</property>
+		<property name="data13" type="java.lang.Integer">
+			<column name="DATA13"/>
+		</property>
+		<property name="data14" type="java.lang.Integer">
+			<column name="DATA14"/>
+		</property>
+		<property name="data15" type="java.lang.Integer">
+			<column name="DATA15"/>
+		</property>
+		<property name="data16" type="java.lang.Integer">
+			<column name="DATA16"/>
+		</property>
+		<property name="data17" type="java.lang.Integer">
+			<column name="DATA17"/>
+		</property>
+		<property name="data18" type="java.lang.Integer">
+			<column name="DATA18"/>
+		</property>
+		<property name="data19" type="java.lang.Integer">
+			<column name="DATA19"/>
+		</property>
+		<property name="data20" type="java.lang.Integer">
+			<column name="DATA20"/>
+		</property>
+		<property name="data21" type="java.lang.Integer">
+			<column name="DATA21"/>
+		</property>
+		<property name="data22" type="java.lang.Integer">
+			<column name="DATA22"/>
+		</property>
+		<property name="data23" type="java.lang.Integer">
+			<column name="DATA23"/>
+		</property>
+		<property name="data24" type="java.lang.Integer">
+			<column name="DATA24"/>
+		</property>
+		<property name="data25" type="java.lang.Integer">
+			<column name="DATA25"/>
+		</property>
+		<property name="data26" type="java.lang.Integer">
+			<column name="DATA26"/>
+		</property>
+		<property name="data27" type="java.lang.Integer">
+			<column name="DATA27"/>
+		</property>
+		<property name="data28" type="java.lang.Integer">
+			<column name="DATA28"/>
+		</property>
+		<property name="data29" type="java.lang.Integer">
+			<column name="DATA29"/>
+		</property>
+		<property name="data30" type="java.lang.Integer">
+			<column name="DATA30"/>
+		</property>
+		<property name="data31" type="java.lang.Integer">
+			<column name="DATA31"/>
+		</property>
+		<property name="data32" type="java.lang.Integer">
+			<column name="DATA32"/>
+		</property>
+		<property name="data33" type="java.lang.Integer">
+			<column name="DATA33"/>
+		</property>
+		<property name="data34" type="java.lang.Integer">
+			<column name="DATA34"/>
+		</property>
+		<property name="data35" type="java.lang.Integer">
+			<column name="DATA35"/>
+		</property>
+		<property name="data36" type="java.lang.Integer">
+			<column name="DATA36"/>
+		</property>
+		<property name="data37" type="java.lang.Integer">
+			<column name="DATA37"/>
+		</property>
+		<property name="data38" type="java.lang.Integer">
+			<column name="DATA38"/>
+		</property>
+		<property name="data39" type="java.lang.Integer">
+			<column name="DATA39"/>
+		</property>
+		<property name="shift" type="java.lang.String">
+			<column name="SHIFT"/>
+		</property>
+		<property name="operuser" type="java.lang.String">
+			<column name="OPERUSER"/>
+		</property>
+		<property name="updatetime" type="java.util.Date">
+			<column name="UPDATETIME"/>
+		</property>
+	</class>
+</mapping>

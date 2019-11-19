@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+    	
+	<Action id="QUERY_ALARM_LOG_ACTION">
+		<Description>查询【故障事件】</Description>
+		<ActionContext>
+			<Data name="limit" type="string" />
+			<Data name="start" type="string" />
+			<Data name="START_EFFECT_TIME" type="string"/><!-- 开始日期 --> 
+			<Data name="END_EFFECT_TIME" type="string"/><!-- 结束时间 --> 
+			<Data name="PRODUCTIONLINENAME" type="string"/><!-- 工段名字--> 
+			<Data name="DATA4" type="string"/><!-- 工位 -->
+			<Data name="DATA3" type="string"/><!-- 属性 -->
+			<Data name="BANCI" type="string"/><!-- 属性 -->
+			<Data name="SECOND" type="string"/><!-- 秒（显示大于几秒的数据） -->
+			<Data name="ALARM_LOG" type="array" output="true"/>
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryAlarmLogAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<Action id="QUERY_STAIION_STOP_RECORD_ACTION">
+		<Description>查询【工位停机记录】</Description>
+		<ActionContext>
+			<Data name="limit" type="string" />
+			<Data name="start" type="string" />
+			<Data name="START_EFFECT_TIME" type="string"/><!-- 开始日期 --> 
+			<Data name="END_EFFECT_TIME" type="string"/><!-- 结束时间 --> 
+			<Data name="PRODUCTIONLINENAME" type="string"/><!-- 工段名字--> 
+			<Data name="DATA7" type="string"/><!-- 工位 --> 
+			<Data name="BANCI" type="string"/><!-- 属性 -->
+			<Data name="STA_STOP_RECORD" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryStationStopLogAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<Action id="QUERY_EXPORT_STAIION_STOP_RECORD_ACTION">
+		<Description>导出【工位停机记录】</Description>
+		<ActionContext>
+
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+			<Data name="COLUMN" type="array"/><!-- 列标 -->
+			<Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="START_EFFECT_TIME" type="string"/><!-- 开始日期 -->
+			<Data name="END_EFFECT_TIME" type="string"/><!-- 结束时间 -->
+			<Data name="PRODUCTIONLINENAME" type="string"/><!-- 工段名字-->
+			<Data name="DATA7" type="string"/><!-- 工位 -->
+			<Data name="BANCI" type="string"/><!-- 属性 -->
+			<Data name="STA_STOP_RECORD" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.ExportStationStopLogAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<Action id="QUERY_STOP_AND_ALARM_ACTION">
+		<Description>查询【工位停机与报警详情记录】</Description>
+		<ActionContext>
+			<Data name="limit" type="string" />
+			<Data name="start" type="string" />
+			<Data name="START_EFFECT_TIME" type="string"/><!-- 开始日期 --> 
+			<Data name="END_EFFECT_TIME" type="string"/><!-- 结束时间 --> 
+			<Data name="PRODUCTIONLINENAME" type="string"/><!-- 工段名字--> 
+			<Data name="DATA4" type="string"/><!-- 工位 -->
+			<Data name="BANCI" type="string"/><!-- 属性 -->
+			<Data name="STA_STOP_RECORD" type="array" output="true"/>
+			<Data name="ALARM_MACHINE" type="string"/><!-- 设备 -->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryStopAndAlarmAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="EXPORT_ALARM_LOG_ACTION">
+		<Description>导出【故障事件】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PRODUCTIONLINENAME" type="string" /><!-- 线体中文名 -->
+			<Data name="DATA7" type="string" /><!-- DATA7 -->
+			<Data name="DATA3" type="string" /><!-- DATA3 -->
+			<Data name="BANCI" type="string" />
+			<Data name="START_EFFECT_TIME" type="string" /><!-- 开始时间 -->
+			<Data name="END_EFFECT_TIME" type="string" /><!-- 结束时间 -->
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.ExportAlarmLogAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="SAVE_ALARM_LOG_ACTION">
+		<Description>保存具体原因【故障事件】</Description>
+		<ActionContext>
+			<Data name="ID" type="string" /><!-- ID -->
+			<Data name="EventData50" type="string" /><!-- 具体原因 -->
+			<Data name="StopReson" type="string" /><!-- 具体原因 -->
+			<Data name="EventData1" type="string" /><!-- 责任部门 -->
+			<Data name="ALARM_LOG" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.SaveAlarmLogAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="QUERY_PP_ALARM_LOG_ACTION">
+		<Description>查询【故障事件】</Description>
+		<ActionContext>
+			<Data name="limit" type="string" />
+			<Data name="start" type="string" />
+			<Data name="START_EFFECT_TIME" type="string"/><!-- 开始日期 --> 
+			<Data name="END_EFFECT_TIME" type="string"/><!-- 结束时间 --> 
+			<Data name="PRODUCTIONLINENAME" type="string"/><!-- 工段名字--> 
+			<Data name="DATA7" type="string"/><!-- 工位 --> 
+			<Data name="DATA3" type="string"/><!-- 属性 -->
+			<Data name="BANCI" type="string"/><!-- 班次 -->
+			<Data name="ALARM_LOG" type="array" output="true"/>
+			<Data name="ATTRBUTE" type="string"/><!-- 停线原因 -->
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryPpAlarmLogAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<Action id="QUERY_REAL_TIME_REPORT_ACTION">
+		<Description>查询【实时报表】</Description>
+		<ActionContext>
+			<Data name="queryType" type="string" />
+			<Data name="limit" type="string" />
+			<Data name="start" type="string" />
+			<!--<Data name="START_EFFECT_TIME" type="string"/>&lt;!&ndash; 开始日期 &ndash;&gt; -->
+			<!--<Data name="END_EFFECT_TIME" type="string"/>&lt;!&ndash; 结束时间 &ndash;&gt; -->
+			<!--<Data name="PRODUCTIONLINENAME" type="string"/>&lt;!&ndash; 工段名字&ndash;&gt; -->
+			<Data name="REALTIME" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryRealTimeReportAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<Action id="EXPORT_REAL_TIME_REPORT_ACTION">
+		<Description>导出【实时】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+			<Data name="COLUMN" type="array"/><!-- 列标 -->
+			<Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PRODUCTIONLINENAME" type="string" /><!-- 线体中文名 -->
+			<Data name="START_EFFECT_TIME" type="string" /><!-- 开始时间 -->
+			<Data name="END_EFFECT_TIME" type="string" /><!-- 结束时间 -->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.ExportRealTimeAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<Action id="EXPORT_PP_ALARM_LOG_ACTION">
+		<Description>导出【故障事件】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PRODUCTIONLINENAME" type="string" /><!-- 线体中文名 -->
+			<Data name="DATA7" type="string" /><!-- DATA7 -->
+			<Data name="DATA3" type="string" /><!-- DATA3 -->
+			<Data name="BANCI" type="string" />
+			<Data name="START_EFFECT_TIME" type="string" /><!-- 开始时间 -->
+			<Data name="END_EFFECT_TIME" type="string" /><!-- 结束时间 -->
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.ExportPpAlarmLogAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+
+
+	<Action id="EXPORT_STOP_AND_ALARM_LOG_ACTION">
+		<Description>导出【停线与故障对应】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+			<Data name="COLUMN" type="array"/><!-- 列标 -->
+			<Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="PRODUCTIONLINENAME" type="string" /><!-- 线体中文名 -->
+			<Data name="DATA7" type="string" /><!-- DATA7 -->
+			<Data name="DATA3" type="string" /><!-- DATA3 -->
+			<Data name="BANCI" type="string" />
+			<Data name="START_EFFECT_TIME" type="string" /><!-- 开始时间 -->
+			<Data name="END_EFFECT_TIME" type="string" /><!-- 结束时间 -->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.ExportStopAndAlarmLogAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+</Config>

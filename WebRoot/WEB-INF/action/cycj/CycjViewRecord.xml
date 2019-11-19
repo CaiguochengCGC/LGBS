@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+
+	<Action id="CYCJ_ADD_PMC_VIEW_RECORD_ACTION">
+		<Description>添加【意见反馈表】</Description>
+		<ActionContext>
+			<Data name="FACTORY" type="string" /><!--工厂-->
+			<Data name="WORKSHOP" type="string" /><!--车间-->
+			<Data name="RECORDDATE" type="string" /><!--录入日期-->
+			<Data name="USERNAME" type="string" /><!--用户名-->
+			<Data name="RECORDCONTENT" type="string" /><!--意见反馈-->
+			<Data name="REMARK" type="string" /><!--备注-->
+			<Data name="OPERUSER" type="string" /><!--操作用户-->
+			<Data name="UPDATETIME" type="string" /><!--最后修改时间-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.cycj.action.AddPmcViewRecordAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="CYCJ_UPDATE_PMC_VIEW_RECORD_ACTION">
+		<Description>修改【意见反馈表】</Description>
+		<ActionContext>
+			<Data name="ID" type="string" /><!--ID-->
+			<Data name="FACTORY" type="string" /><!--工厂-->
+			<Data name="WORKSHOP" type="string" /><!--车间-->
+			<Data name="RECORDDATE" type="string" /><!--录入日期-->
+			<Data name="USERNAME" type="string" /><!--用户名-->
+			<Data name="RECORDCONTENT" type="string" /><!--意见反馈-->
+			<Data name="REMARK" type="string" /><!--备注-->
+			<Data name="OPERUSER" type="string" /><!--操作用户-->
+			<Data name="UPDATETIME" type="string" /><!--最后修改时间-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.cycj.action.UpdatePmcViewRecordAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="CYCJ_DELETE_PMC_VIEW_RECORD_ACTION">
+		<Description>删除【意见反馈表】</Description>
+		<ActionContext>
+			<Data name="ID" type="string" /><!--ID-->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.cycj.action.DeletePmcViewRecordAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="CYCJ_QUERY_PMC_VIEW_RECORD_ACTION">
+		<Description>查询【意见反馈表】</Description>
+		<ActionContext>
+		    <Data name="START_PLAN_DATE" type="string" /><!-- 开始日期 -->
+			<Data name="END_PLAN_DATE" type="string" /><!-- 结束日期 -->
+			<Data name="PMC_VIEW_RECORD" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.cycj.action.QueryPmcViewRecordAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="CYCJ_EXPORT_PMC_VIEW_RECORD_ACTION">
+		<Description>查询【意见反馈表】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+		    <Data name="START_PLAN_DATE" type="string" /><!-- 开始日期 -->
+			<Data name="END_PLAN_DATE" type="string" /><!-- 结束日期 -->
+			<Data name="PMC_VIEW_RECORD" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.cycj.action.ExportPmcViewRecordAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+</Config>

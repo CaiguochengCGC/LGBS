@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='utf-8'?>
+<hibernate-configuration>
+	<session-factory>
+        
+        <!-- 链接池配置localhost-->
+        <property name="hibernate.c3p0.min_size">1</property>
+        <property name="hibernate.c3p0.max_size">200</property>
+        <property name="hibernate.c3p0.timeout">1800</property>
+        <property name="hibernate.c3p0.max_statements">250</property>
+        <property name="hibernate.connection.autocommit">false</property>
+        
+        <!-- 正式环境(现目前MES程序与数据库同时部署在一个服务器上,所以连接也可用 127.0.0.1:1433)-->
+       <!-- <property name="hibernate.connection.url">jdbc:sqlserver://10.92.23.166:1433;databaseName=LGBS;</property>
+        <property name="hibernate.connection.username">SH_saic</property>
+        <property name="hibernate.connection.password">SH_saic123</property>-->
+
+        <!--<property name="hibernate.connection.url">jdbc:sqlserver://10.92.23.166:1433;databaseName=LGBS;</property>
+        <property name="hibernate.connection.username">SH_saic</property>
+        <property name="hibernate.connection.password">SH_saic123</property>-->
+
+            <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=LGBS;</property>
+            <property name="hibernate.connection.username">sa</property>
+            <property name="hibernate.connection.password">123456</property>
+
+
+       	<!-- 本地测试环境
+       	<property name="hibernate.connection.url">jdbc:sqlserver://192.168.126.146;instanceName=mssql;databaseName=WebReport_DB;</property>
+        <property name="hibernate.connection.username">yao</property>
+        <property name="hibernate.connection.password">123456</property>
+        -->
+
+       	<!-- 本地测试环境 虚拟机 -->
+       	  <!--
+       	<property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=WebReport_DB;</property>
+       <property name="hibernate.connection.username">pmc</property>
+        <property name="hibernate.connection.password">saic-123456</property>
+         --> 
+        <!-- huxiaotian
+        <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=LGBS;</property>
+       <property name="hibernate.connection.username">huxiaotian</property>
+        <property name="hibernate.connection.password">huxiaotian922.</property> 
+-->
+        <!--
+       	<property name="hibernate.connection.url">jdbc:sqlserver://localhost:49689;databaseName=WebReport_DB;</property>
+        <property name="hibernate.connection.username">pmc</property>
+        <property name="hibernate.connection.password">saic-123456</property>
+        -->
+       <!--   	 本地测试环境 虚拟机-->
+       	<!-- <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=WebReport_DB;</property>
+        <property name="hibernate.connection.username">huo</property>
+        <property name="hibernate.connection.password">123456</property> -->
+       
+     
+        <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+        
+        <property name="show_sql">true</property>
+      
+        <!-- Websphere数据源
+        <property name="hibernate.connection.datasource">jdbc/mesapp</property>
+        <property name="dialect">org.hibernate.dialect.Oracle9Dialect</property>
+        <property name="show_sql">false</property>
+        -->
+        
+		<!-- PO的配置信息 -->
+		<!-- PUB -->
+		<mapping resource="com/hanthink/pub/po/PubUser.bind.xml"/>
+        <mapping resource="com/hanthink/pub/po/PubDataDict.bind.xml"/>
+        <mapping resource="com/hanthink/pub/po/SysParam.bind.xml"/>
+        <mapping resource="com/hanthink/pub/po/PubRole.bind.xml"/>
+        <mapping resource="com/hanthink/pub/po/PubRolePrivileges.bind.xml"/>
+        <mapping resource="com/hanthink/pub/po/PubUserRole.bind.xml"/>
+        
+        <!-- pmc -->
+        <mapping resource="com/hanthink/pmc/po/PmcDateImport.bind.xml"/>
+        <mapping resource="com/hanthink/pmc/po/PmcEquipmentStop.bind.xml"/>
+        <mapping resource="com/hanthink/pmc/po/PmcEquipmentStopline.bind.xml"/>
+        <mapping resource="com/hanthink/pmc/po/PmcDatePp.bind.xml"/>
+        <mapping resource="com/hanthink/pmc/po/PmcStationCt.bind.xml"/>
+        <mapping resource="com/hanthink/pmc/po/Tabproducttype.bind.xml"/>
+        <mapping resource="com/hanthink/pmc/po/TabCycleTimePO.bind.xml"/>
+        <mapping resource="com/hanthink/pmc/po/PmcPpStation.bind.xml"/>
+        <mapping resource="com/hanthink/pmc/po/PmcViewRecord.bind.xml"/>
+        <mapping resource="com/hanthink/pmc/po/PlanProductEdit.bind.xml"/>
+        <mapping resource="com/hanthink/pmc/po/WorkDateEdit.bind.xml"/>
+
+        <!-- cycj -->
+        <mapping resource="com/hanthink/cycj/po/PmcDateImport.bind.xml"/>
+        <mapping resource="com/hanthink/cycj/po/PmcEquipmentStop.bind.xml"/>
+        <mapping resource="com/hanthink/cycj/po/PmcEquipmentStopline.bind.xml"/>
+        <mapping resource="com/hanthink/cycj/po/PmcDatePp.bind.xml"/>
+        <mapping resource="com/hanthink/cycj/po/PmcStationCt.bind.xml"/>
+        <mapping resource="com/hanthink/cycj/po/Tabproducttype.bind.xml"/>
+        <mapping resource="com/hanthink/cycj/po/TabCycleTimePO.bind.xml"/>
+        <mapping resource="com/hanthink/cycj/po/PmcPpStation.bind.xml"/>
+        <mapping resource="com/hanthink/cycj/po/PmcViewRecord.bind.xml"/>
+        <mapping resource="com/hanthink/cycj/po/tabStoplline.bind.xml"/>
+        
+        <!-- yqcj -->
+        <mapping resource="com/hanthink/yqcj/po/PmcDateImport.bind.xml"/>
+        <mapping resource="com/hanthink/yqcj/po/PmcEquipmentStop.bind.xml"/>
+        <mapping resource="com/hanthink/yqcj/po/PmcEquipmentStopline.bind.xml"/>
+        <mapping resource="com/hanthink/yqcj/po/PmcDatePp.bind.xml"/>
+        <mapping resource="com/hanthink/yqcj/po/PmcStationCt.bind.xml"/>
+        <mapping resource="com/hanthink/yqcj/po/Tabproducttype.bind.xml"/>
+        <mapping resource="com/hanthink/yqcj/po/TabCycleTimePO.bind.xml"/>
+        <mapping resource="com/hanthink/yqcj/po/PmcPpStation.bind.xml"/>
+        <mapping resource="com/hanthink/yqcj/po/PmcViewRecord.bind.xml"/>
+        <mapping resource="com/hanthink/yqcj/po/tabStoplline.bind.xml"/>
+        
+        
+        <!-- zzcj -->
+        <mapping resource="com/hanthink/zzcj/po/PmcDateImport.bind.xml"/>
+        <mapping resource="com/hanthink/zzcj/po/PmcEquipmentStop.bind.xml"/>
+        <mapping resource="com/hanthink/zzcj/po/PmcEquipmentStopline.bind.xml"/>
+        <mapping resource="com/hanthink/zzcj/po/PmcDatePp.bind.xml"/>
+        <mapping resource="com/hanthink/zzcj/po/PmcStationCt.bind.xml"/>
+        <mapping resource="com/hanthink/zzcj/po/Tabproducttype.bind.xml"/>
+        <mapping resource="com/hanthink/zzcj/po/TabCycleTimePO.bind.xml"/>
+        <mapping resource="com/hanthink/zzcj/po/PmcPpStation.bind.xml"/>
+        <mapping resource="com/hanthink/zzcj/po/PmcViewRecord.bind.xml"/>
+        <mapping resource="com/hanthink/zzcj/po/tabStoplline.bind.xml"/>
+	</session-factory>
+</hibernate-configuration>

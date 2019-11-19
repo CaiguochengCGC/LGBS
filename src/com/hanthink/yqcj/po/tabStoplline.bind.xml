@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<mapping>
+	<class name="com.hanthink.yqcj.po.tabStoplinePO" table="YQCJ_tabStopline">
+		<property name="id" type="java.lang.Integer">
+			<column name="ID"/>
+		</property>
+		<property name="eventdata3" type="java.lang.String">
+			<column name="EVENTDATA3"/>
+		</property>
+		<property name="eventdata50" type="java.lang.String">
+			<column name="EVENTDATA50"/>
+		</property>
+		<property name="eventdata51" type="java.lang.String">
+			<column name="EVENTDATA51"/>
+		</property>
+		<property name="eventdata53" type="java.lang.String">
+			<column name="EVENTDATA53"/>
+		</property>
+		<property name="eventdata54" type="java.lang.String">
+			<column name="EVENTDATA54"/>
+		</property>
+		<property name="banci" type="java.lang.String">
+			<column name="BANCI"/>
+		</property>
+	</class>
+</mapping>

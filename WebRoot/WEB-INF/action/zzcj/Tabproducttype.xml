@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+
+	<Action id="ZZCJ_QUERY_tabProductType_ACTION">
+		<Description>产量查询【tabProductType】</Description>
+		<ActionContext>
+			<Data name="START_PLAN_DATE" type="string" /><!-- 生产开始日期 -->
+			<Data name="END_PLAN_DATE" type="string" /><!-- 生产结束日期 -->
+			<Data name="BANCI" type="string" /><!-- 班次 -->
+			<Data name="mojuhao" type="string" /><!-- 模具号 -->
+			<Data name="EventDate18" type="string" /><!-- 工段 -->
+			<Data name="EventDate2" type="string" /><!-- 班次 -->
+			<Data name="tabProductType" type="array" output="true"/>
+			
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.zzcj.action.QueryTabproducttypeAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="ZZCJ_EXPORT_TAB_PRODUCT_TYPE_ACTION">
+		<Description>查询【tabProductType】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="START_PLAN_DATE" type="string" /><!-- 生产开始日期 -->
+			<Data name="END_PLAN_DATE" type="string" /><!-- 生产结束日期 -->
+			<Data name="EventDate18" type="string" /><!-- 工段 -->
+			<Data name="BANCI" type="string" /><!-- 班次 -->
+			<Data name="MOJUHAO" type="string" /><!-- 模具号 -->
+			<Data name="tabProductType" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.zzcj.action.ExportTabproducttypeAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+</Config>

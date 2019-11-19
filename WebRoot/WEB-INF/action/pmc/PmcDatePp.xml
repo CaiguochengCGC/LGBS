@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 配置文件  -->
+<Config xmlns="http://dms/action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dms/action DefAction.xsd">
+
+	<Action id="QUERY_PMC_DATE_PP_ACTION">
+		<Description>查询【实际生产时间表】</Description>
+		<ActionContext>
+			<Data name="PPDATE" type="string" /><!-- 生产日期 -->
+			<Data name="BANCI" type="string" />
+			<Data name="PMC_DATE_PP" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryPmcDatePpAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="QUERY_PMC_DATE_PP_PERIOD_ACTION">
+		<Description>查询【实际生产时间查询表】</Description>
+		<ActionContext>
+			<Data name="START_PLAN_DATE" type="string" /><!-- 生产开始日期 -->
+			<Data name="END_PLAN_DATE" type="string" /><!-- 生产结束日期 -->
+			<Data name="PRODUCTIONLINENAME" type="string" /><!-- 工段 -->
+			<Data name="PMC_DATE_PP" type="array" output="true"/>
+			<Data name="BANCI" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryPmcDatePpPeriodAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="EXPORT_PMC_DATE_PP_PERIOD_ACTION">
+		<Description>导出【实际生产时间查询表】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="START_PLAN_DATE" type="string" /><!-- 生产开始日期 -->
+			<Data name="END_PLAN_DATE" type="string" /><!-- 生产结束日期 -->
+			<Data name="PRODUCTIONLINENAME" type="string" /><!-- 工段 -->
+			<Data name="BANCI" type="string" />
+			<Data name="PMC_DATE_PP" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.ExportPmcDatePpPeriodAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	
+	<Action id="EXPORT_PMC_DATE_PP_ACTION">
+		<Description>导出【实际生产时间表】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+		    <Data name="COLUMN" type="array"/><!-- 列标 -->
+		    <Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="WORKDATE" type="string" /><!-- 日期 -->
+			<Data name="BANCI" type="string" />
+			<Data name="PMC_DATE_PP" type="array" output="true"/>
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.ExportPmcDatePpAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+
+	
+</Config>

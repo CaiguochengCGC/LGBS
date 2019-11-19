@@ -1,0 +1,50 @@
+.bsBg
+{
+	background-color:black;
+}
+.batchScreen
+{
+	background-color:black;
+	padding-top:10px;
+	padding-left:10px;
+	line-height:70px;
+}
+.tp
+{
+	border-top:5px solid red;
+	border-bottom:0 none;
+	border-left:5px solid red;
+	border-right:5px solid red;
+}
+.mp
+{
+	border-top:3px solid red;
+	border-bottom:0 none;
+	border-left:5px solid red;
+	border-right:5px solid red;
+}
+.bp
+{
+	border-top:3px solid red;
+	border-bottom:5px solid red;
+	border-left:5px solid red;
+	border-right:5px solid red;
+}
+.mlp
+{
+	border-top:0 none;
+	border-bottom:0 none;
+	border-left:0 none;
+	border-right:3px solid red;
+}
+.mrp
+{
+	border-top:0 none;
+	border-bottom:0 none;
+	border-left:0 none;
+	border-right:0 none;
+}
+.bs-font
+{
+	font:normal 20px tahoma, arial, helvetica, sans-serif;
+}
