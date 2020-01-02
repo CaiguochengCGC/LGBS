@@ -14,13 +14,15 @@
         <property name="hibernate.connection.username">SH_saic</property>
         <property name="hibernate.connection.password">SH_saic123</property>-->
 
-        <!--<property name="hibernate.connection.url">jdbc:sqlserver://10.92.23.166:1433;databaseName=LGBS;</property>
+<!--
+        <property name="hibernate.connection.url">jdbc:sqlserver://10.92.23.166:1433;databaseName=LGBS;</property>
         <property name="hibernate.connection.username">SH_saic</property>
-        <property name="hibernate.connection.password">SH_saic123</property>-->
+        <property name="hibernate.connection.password">SH_saic123</property>
+-->
 
-            <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=LGBS;</property>
-            <property name="hibernate.connection.username">sa</property>
-            <property name="hibernate.connection.password">123456</property>
+             <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=LGBS;</property>
+             <property name="hibernate.connection.username">sa</property>
+             <property name="hibernate.connection.password">123456</property>
 
 
        	<!-- 本地测试环境

@@ -1457,7 +1457,7 @@ Ext.data.Store.prototype.findExactWithoutObj =  function(property, value, start)
 Ext.override(Ext.data.JsonStore, {
     listeners : {
         exception : function(proxy, type, action, options, res, arg){
-            
+            debugger
             var result = Ext.decode(res.responseText);
             var root = result;
             var hasData = false;

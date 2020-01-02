@@ -38,12 +38,24 @@ public class PmcPpStartRateDao extends DAO {
      */
     public static List queryPmcPpStartRate(Connection con, Date yyyyMm,String banci,String whereSQL) throws Exception {
         CQExp cqExp = CQExp.instance();
-        cqExp.select("select * ,YEAEMONTH YYYY_MM,cast(MMSTOPTIME/60.0 as decimal(18,2)) as MMSTOPTIMEE,(PRODUCTIONLINENAME+'['+cast(BANCI as varchar)+']') AS FORMAT_PRODUCTLINE");
+        cqExp.select("select * ,YEAEMONTH YYYY_MM,cast(MMSTOPTIME/60.0 as decimal(18,2)) as MMSTOPTIMEE,(PRODUCTIONLINENAME+'['+cast(PMC_PP_START_RATE.BANCI as varchar)+']') AS FORMAT_PRODUCTLINE,b.ONEWORKTIME*60 as test");
         cqExp.select(" from PMC_PP_START_RATE ");
+        cqExp.select("    left join \n" +
+                " (\n" +
+                " SELECT\n" +
+                "       convert(char(7),[PPDATE],23) [PPDATE]\n" +
+                "      ,[PRODUCTLINE]\n" +
+                "      ,sum([ONEWORKTIME]) [ONEWORKTIME]\n" +
+                "      ,[BANCI]\n" +
+                "  FROM [LGBS].[dbo].[PMC_PP_PRODUCT_TIME]\n" +
+                "  \n" +
+                "group by convert(char(7),[PPDATE],23),[PRODUCTLINE],[BANCI]\n" +
+                " \n" +
+                " )b on PMC_PP_START_RATE.BANCI=b.BANCI and PMC_PP_START_RATE.PRODUCTIONLINE=b.PRODUCTLINE and PMC_PP_START_RATE.YEAEMONTH=b.PPDATE ");
         cqExp.where();
         cqExp.select(whereSQL);
         cqExp.filed(null == yyyyMm ? null : "convert(char(7),YEAEMONTH,23)", CQExp.EQ, DateUtils.format(yyyyMm, "yyyy-MM"));
-        cqExp.filed("".equals(banci)? null : "BANCI", CQExp.EQ, banci);
+        cqExp.filed("".equals(banci)? null : "PMC_PP_START_RATE.BANCI", CQExp.EQ, banci);
         cqExp.orderByAsc("seq,PRODUCTIONLINENAME");
         logger.debug(" 开动率月报表PMC_PP_START_RATE:  " + cqExp.getSql());
         return cqExp.getDynaBeanMapList("PMC_PP_START_RATE", con);

@@ -192,4 +192,74 @@
 			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
 		</ActionParam>
 	</Action>
+	<!-- 查询【周开动率】 -->
+	<Action id="QUERY_PMC_WeekDay_StartRate">
+		<Description>查询【周开动率】</Description>
+		<ActionContext>
+			<Data name="YYYY" type="string" /><!-- 日期 -->
+			<Data name="PRODUCTIONLINENAME" type="string" />
+			<Data name="weekDayStartRateR" type="array" output="true"/>
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryPmcWeekDayStartRateAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<!-- 查询【开动率汇总_线体】 -->
+<!--	<Action id="QUERY_PMC_WeekDay_StartRate">
+		<Description>查询【周开动率】</Description>
+		<ActionContext>
+			<Data name="YYYY" type="string" />&lt;!&ndash; 日期 &ndash;&gt;
+			<Data name="PRODUCTIONLINENAME" type="string" />
+			<Data name="weekDayStartRateR" type="array" output="true"/>
+			<Data name="queryType" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryPmcWeekDayStartRateAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>-->
+	<!-- 查询【周开动率相关备注】 -->
+	<Action id="QUERY_PMC_WeekDay_StartRate_note">
+		<Description>查询【周开动率相关备注】</Description>
+		<ActionContext>
+			<Data name="ID" type="string" /><!--ID -->
+			<Data name="weekDayStartRateNoteR" type="array" output="true"/>
+
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.QueryPmcWeekDayStartRateNoteAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+	<!--开动率下面板插入操作-->
+	<Action id="add_PMC_WeekDay_StartRate_note">
+		<Description>添加【作息时间模板】</Description>
+		<ActionContext>
+			<Data name="ID" type="string" />
+			<Data name="WEEKL" type="string" />
+			<Data name="WORKSTARTTIME" type="string" />
+			<Data name="WORKSECTION" type="string" />
+			<Data name="AREA" type="string" />
+			<Data name="STATION" type="string" />
+			<Data name="MODELS" type="string" />
+			<Data name="PROBLEMDESCRIPTION" type="string" />
+			<Data name="CAUSEANALISYS" type="string" />
+			<Data name="MEASURES" type="string" />
+			<Data name="DOWNTIMEMINUTS" type="string" />
+			<Data name="REGIONALRESPONSIBLEPERSON" type="string" />
+			<Data name="SOLVEPEOPLE" type="string" />
+			<Data name="STATEOFTHEPROBLEM" type="string" />
+			<Data name="WHERHERTHEOVERDUER" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.AddPmcWeekDayAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
 </Config>

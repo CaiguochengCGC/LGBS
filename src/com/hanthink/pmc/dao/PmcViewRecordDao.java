@@ -110,7 +110,25 @@ public class PmcViewRecordDao extends DAO {
         logger.info("修改ct:" + sql);
         query.executeUpdate(con);
     }
+    public static void UpdateWRate(Connection con,String production1,int id, int BANCI,String quyu,String YYYY_MM) throws Exception {
+        StringBuffer sql = new StringBuffer();
+        sql.append("UPDATE PMC_PP_START_RATE_W  SET quyu='"+quyu+"' WHERE ID='"+id+"' ");
+        CQuery query = CQueryFactoryTool.createFactory().createCQuery();
+        query.setCommand(sql.toString());
+        logger.info("修改ct:" + sql);
+        query.executeUpdate(con);
+    }
 
+    public static void AddWRate(Connection con,String ID,String WEEKL, String WORKSTARTTIME,String WORKSECTION,String AREA,String STATION
+            ,String MODELS,String PROBLEMDESCRIPTION,String CAUSEANALISYS,String MEASURES,String DOWNTIMEMINUTS,String REGIONALRESPONSIBLEPERSON,String SOLVEPEOPLE,String STATEOFTHEPROBLEM,String WHERHERTHEOVERDUER) throws Exception {
+        StringBuffer sql = new StringBuffer();
+        sql.append("insert into PMC_PP_START_RATE_W_edit(ID,WEEKL,WORKSTARTTIME,WORKSECTION,AREA,STATION,MODELS,PROBLEMDESCRIPTION,CAUSEANALISYS,MEASURES,DOWNTIMEMINUTS,REGIONALRESPONSIBLEPERSON,SOLVEPEOPLE,STATEOFTHEPROBLEM,WHERHERTHEOVERDUER)" +
+                "VALUES('"+ID+"','"+WEEKL+"','"+WORKSTARTTIME+"','"+WORKSECTION+"','"+AREA+"','"+STATION+"','"+MODELS+"','"+PROBLEMDESCRIPTION+"','"+CAUSEANALISYS+"','"+MEASURES+"','"+DOWNTIMEMINUTS+"','"+REGIONALRESPONSIBLEPERSON+"','"+SOLVEPEOPLE+"','"+STATEOFTHEPROBLEM+"','"+WHERHERTHEOVERDUER+"')");
+        CQuery query = CQueryFactoryTool.createFactory().createCQuery();
+        query.setCommand(sql.toString());
+        logger.info("增加开动率汇总备注:" + sql);
+        query.executeUpdate(con);
+    }
     public static void queryUPPC(Connection con,String id,Integer actProduct) throws Exception {
         StringBuffer sql = new StringBuffer();
         sql.append("UPDATE PMC_PP_PRODUCT SET ActProduct="+actProduct+" WHERE ID='"+id+"' ");

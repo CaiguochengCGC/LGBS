@@ -3,7 +3,7 @@
 <Config xmlns="http://dms/action"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://dms/action DefAction.xsd">
-
+<!--开动率这段代码好像重名无效没被diao，暂时不修改，怕炸，caiguocheng的锅-->
 	<Action id="QUERY_PMC_PP_START_RATE_W_ACTION">
 		<Description>查询【开动率周月报表】</Description>
 		<ActionContext>

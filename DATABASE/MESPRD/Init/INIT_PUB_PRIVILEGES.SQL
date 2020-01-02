@@ -21,6 +21,7 @@ UNION ALL SELECT '02000002', '0','report/kpiIndex',         'KPI指标报表',      
 UNION ALL SELECT '02000003', '0','report/yieldReport',      '产量报表',                   'BODY_REPORT',  '4000', ''
 UNION ALL SELECT '02000004', '0','report/beatReport',       '节拍报表',                   'BODY_REPORT',  '5000', ''
 UNION ALL SELECT '02000005', '0','report/oee',                 '开动率报表',               'BODY_REPORT',  '6000', ''
+UNION ALL SELECT '02000021', '0','report/oeeCount',                 '开动率汇总报表',               'BODY_REPORT',  '6001', ''
 UNION ALL SELECT '02000006', '0','report/tabStopLine',      '工位停机报表',            'BODY_REPORT',  '7000', ''
 UNION ALL SELECT '02000007', '0','report/tabEquStopLine',   '工段停线报表',                'BODY_REPORT',  '8000', ''
 

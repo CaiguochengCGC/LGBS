@@ -162,4 +162,26 @@
 		</ActionParam>
 	</Action>
 
+	<Action id="UPDATE_W_Rate_Note_ACTION">
+		<Description>更新【线体开动率的】</Description>
+		<ActionContext>
+			<Data name="PRODUCTION" type="string" />
+			<Data name="ID" type="Integer" />
+			<Data name="BANCI" type="Integer" />
+			<Data name="quyu" type="string" />
+			<Data name="YYYY_MM" type="string" />
+			<Data name="BP32" type="Integer" />
+			<Data name="AS21" type="Integer" />
+			<Data name="AS22" type="Integer" />
+			<Data name="BP34" type="Integer" />
+			<Data name="AS24" type="Integer" />
+			<Data name="AS26" type="Integer" />
+			<Data name="AS28" type="Integer" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.UpdateWRateAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
 </Config>

@@ -36,5 +36,34 @@
 			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
 		</ActionParam>
 	</Action>
-	
+
+	<Action id="QUERY_PMC_WeekDay_StartRate_Excle">
+		<Description>导出【开动率汇总报表】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+			<Data name="COLUMN" type="array"/><!-- 列标 -->
+			<Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="YYYY" type="string" />
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.ExportPmcPpWeekDayAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
+
+	<Action id="QUERY_PMC_WeekDay_StartRate_Down_Excle">
+		<Description>导出【开动率汇总备注报表】</Description>
+		<ActionContext>
+			<Data name="HEADER" type="array"/><!-- 列名 -->
+			<Data name="COLUMN" type="array"/><!-- 列标 -->
+			<Data name="WIDTH" type="array"/><!-- 列宽 -->
+			<Data name="ID" type="Integer"/><!-- 列宽 -->
+		</ActionContext>
+		<ActionParam>
+			<ActionStep id="1" classname="cn.boho.framework.actions.BeginTransactionAction" on1Do="next" onOtherDo="3" />
+			<ActionStep id="2" classname="com.hanthink.pmc.action.ExportPmcPpWeekRemarkDayAction" on1Do="next" onOtherDo="3"/>
+			<ActionStep id="3" classname="cn.boho.framework.actions.EndTransactionAction" onOtherDo="return" />
+		</ActionParam>
+	</Action>
 </Config>

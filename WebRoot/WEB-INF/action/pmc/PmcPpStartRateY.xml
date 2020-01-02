@@ -36,8 +36,9 @@
 		</ActionParam>
 	</Action>
 
+<!--开动率周报表-->
 	<Action id="QUERY_PMC_PP_START_RATE_W_ACTION">
-		<Description>查询【开动率周月报表】</Description>
+		<Description>查询【开动率周报表】</Description>
 		<ActionContext>
 			<Data name="BANCI" type="string" />
 			<Data name="YYYY" type="string" /><!-- 日期 -->
